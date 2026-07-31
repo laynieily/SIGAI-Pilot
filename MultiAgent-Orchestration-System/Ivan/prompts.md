@@ -209,3 +209,56 @@ Claude divided the implementation into small, independent sections and provided 
 
 Breaking the implementation into small sections made it easier to build a mental model of the framework before attempting to use it. Rather than treating the generated code as something to copy, explaining my own interpretation first helped identify misconceptions early and reinforced my understanding of the overall architecture.
 
+## Prompt 6
+
+### Prompt
+
+Investigated the execution flow of LangGraph, with a particular focus on the role of `AgentState` and how information is shared between graph nodes during execution.
+
+### Purpose
+
+Develop a mental model of how LangGraph manages execution state, distinguishing the responsibilities of the graph itself, the execution engine, and the shared state object before continuing implementation.
+
+### Outcome
+
+Claude explained that `AgentState` is not responsible for controlling the execution flow. Instead, it acts as the shared memory passed sequentially through every node in the graph, allowing each agent to read existing information and contribute partial updates. This clarified the distinction between the orchestration performed by LangGraph and the data carried throughout the workflow.
+
+### Reflection
+
+Understanding `AgentState` as shared execution memory rather than a controller significantly clarified how LangGraph operates internally. This provided a much stronger foundation for understanding the remaining architecture.
+
+## Prompt 7
+
+### Prompt
+
+Reviewed the Phase 1 project guidelines to determine which components had already been implemented and which should be prioritized next to produce meaningful progress.
+
+### Purpose
+
+Evaluate the current state of the implementation against the official project guidelines and identify the next development milestone.
+
+### Outcome
+
+Claude compared the existing implementation against each Phase 1 requirement. We concluded that the agent hierarchy and task decomposition engine were structurally complete, while the Tool Registry and conditional graph routing remained unfinished. Based on this analysis, implementing the Tool Registry was selected as the next milestone because it was self-contained and could produce visible progress without requiring major architectural changes.
+
+### Reflection
+
+Reviewing the implementation against the original guidelines helped prioritize development based on project requirements rather than adding features arbitrarily.
+
+## Prompt 8
+
+### Prompt
+
+Requested the implementation of the Tool Registry and the conditional routing required by the LangGraph state machine while preserving the current "happy path" behavior using the mock LLM.
+
+### Purpose
+
+Implement the remaining Phase 1 architecture components while keeping the mock environment deterministic and suitable for incremental testing.
+
+### Outcome
+
+Claude implemented a centralized Tool Registry that manages tool registration, permissions, rate limiting, and invocation logging. The graph was also extended with conditional routing for specialist failures, reviewer rejection, and human escalation. The mock environment was intentionally configured so these branches remain inactive during normal execution, allowing the project to continue following the happy path while the infrastructure for future behavior is already in place.
+
+### Reflection
+
+This session emphasized building infrastructure before enabling complex behaviors. Even though the conditional branches are currently inactive, implementing them early establishes a scalable architecture for future development.
