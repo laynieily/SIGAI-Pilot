@@ -1,3 +1,5 @@
+Project Repo: https://github.com/fizagui2/hybrid-rag-document-assistant
+
 # Project Timeline
 
 **Project:** RAG Pipeline with Hybrid Search over Internal Documents
