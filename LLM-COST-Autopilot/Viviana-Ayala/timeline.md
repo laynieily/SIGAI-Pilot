@@ -8,7 +8,8 @@ Project repo: https://github.com/Vayala13/LLM-COST-Autopilot.git
 - 2026-07-29 — Phase 2.2: Built the labeled dataset (data/labeled_prompts.jsonl, 201 hand-labeled prompts: 72/62/67 across tiers 1/2/3). Wrote app/classifier/features.py to extract 11 features per prompt. scripts/inspect_dataset.py validates balance and writes data/prompt_features.json. Shipped through coding-guidelines + security-best-practices, PR #1, pr-review, squash-merged to main.
 - 2026-07-31 — Phase 2.3: Trained scikit-learn classifiers (logistic regression + random forest) on 11 features / 201 prompts. Both hit 88.2% held-out accuracy. Winner: logistic regression → models/complexity_classifier.joblib. PR #2 reviewed + merged.
 - 2026-07-31 — Phase 2.4: Added configs/routing_map.yaml (Tier 1 → llama-local, Tier 2 → gemini-flash, Tier 3 → claude-sonnet). Implemented app/router/map.py (load_routing_map, model_for_tier, route_prompt) with registry-key validation. Smoke script scripts/show_routing.py. Ran security-best-practices + coding-guidelines, then full pr-review before merge. Phase 2 complete.
+- 2026-08-01 — Phase 3.1: Added configs/quality_thresholds.yaml (extraction field_coverage ≥ 1.0; summarization llm_judge_score > 4/5 with judge claude-sonnet; classification label_agreement == 1.0 with reference claude-sonnet — GPT-4o unavailable while OpenAI disabled). Loader app/quality/thresholds.py; smoke scripts/show_quality_thresholds.py. Cloud agent PR #4, guidelines + security + pr-review, merged to main.
 
-## Current Status (as of 2026-07-31)
+## Current Status (as of 2026-08-01)
 
-- Phase 3 of 6 next — Async Quality Verification Loop. Next: Phase 3.1 — define quality thresholds per use case (extraction / summarization / classification).
+- Phase 3 of 6 — Async Quality Verification Loop. Next: Phase 3.2 — async verifier (queue high-tier comparison after response; score agreement; log routing failures). Cloud agent in flight.

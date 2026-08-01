@@ -2,6 +2,11 @@
 
 This project uses Fable (Cursor's coding assistant) guided by a persistent AGENTS.md context file rather than one-off prompts. Representative prompts are logged below as they come up.
 
+### 2026-08-01
+
+- **"continue" / Phase 3 via `/in-cloud`** — spawned cloud agents per phase step; coding-guidelines + security-best-practices before commit/push; pr-review after each phase; new branch + different agent per step. Phase 3.1 quality thresholds → PR #4 merged. Standing rule: after each phase merges, update these SIGAI-Pilot docs (`issues.md`, `prompts.md`, `timeline.md`).
+- **"make sure to update issues.md prompts.md and timeline.md in my SIGAI-Pilot files as well after each phase is merged"** — recorded as standing process; backfilled Phase 3.1 into these three files.
+
 ### 2026-07-31 (evening)
 
 - **"do phase 2.4 … /security-best-practices, /coding-guidelines, /pr-review … push to main and SIGAI-Pilot"** — built tier→model routing YAML + loader; ran security + coding-guidelines; opened PR and full pr-review before merge; updated these SIGAI docs.
