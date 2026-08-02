@@ -18,5 +18,7 @@
 - Phase 4.2 GPT-4o counterfactual: prefer tokens × registry pricing; else 500 in / 250 out fallback when tokens missing (2026-08-02).
 - Phase 4.2 dashboard binds Streamlit to localhost; shows aggregates only (no raw prompts) (2026-08-02).
 - Claude Sonnet list price > GPT-4o → some days actual > counterfactual; overall mix still saves (~37% on demo seed) (2026-08-02).
+- Phase 4.3 money-shot: `cost_reduction_pct` vs all GPT-4o; `show_savings --demo` uses temp DB so it won’t write an empty `data/requests.db` (2026-08-02).
+- Phase 4.3 dashboard hero `unsafe_allow_html` only interpolates float/USD aggregates from metrics (no user content) (2026-08-02).
 
 - Current blockers: none as of 2026-08-02.
