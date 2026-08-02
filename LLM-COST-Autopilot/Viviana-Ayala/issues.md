@@ -13,5 +13,7 @@
 - Cloud agent cannot push to `laynieily/SIGAI-Pilot` (403) → parent applies SIGAI doc updates after each merge (2026-08-02).
 - Routing-failure JSONL stores only `prompt_hash` → Phase 3.4 writes training prompts to a separate gitignored `data/feedback_prompts.jsonl` at failure time while the prompt is still in memory (2026-08-02).
 - Cloud agent `gh pr comment` / ManagePullRequest comment returned 403 “Resource not accessible by integration” on PR #8 → self-review captured in agent report (2026-08-02 Phase 3.4).
+- Cloud agent `gh pr review` / ManagePullRequest `post_comment` returned 403 on PR #9 (Phase 4.1) → self-review captured in agent report; squash-merge via `gh pr merge` succeeded (2026-08-02).
+- Phase 4.1 audit DB stores `prompt_hash` + metrics only (no raw prompts/secrets); `data/requests.db` gitignored; all writes use parameterized SQL (2026-08-02).
 
 - Current blockers: none as of 2026-08-02.

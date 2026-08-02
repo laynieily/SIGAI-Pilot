@@ -4,6 +4,7 @@ This project uses Fable (Cursor's coding assistant) guided by a persistent AGENT
 
 ### 2026-08-02
 
+- **"Phase 4.1 — Log everything (SQLite audit trail)"** via `/in-cloud` — new cloud agent on branch `cursor/phase-4-1-request-logging-c183`; `app/audit/store.py` + `log_completion` call-site helper; gitignored `data/requests.db`; smoke offline; PR #9 ready (not draft); self-review (gh/ManagePullRequest comment 403); squash-merged to main. Next Phase 4.2. SIGAI docs pushed by parent.
 - **"Phase 3.4 — Feedback to classifier (LLM Cost AutoPilot)"** via `/in-cloud` — new cloud agent on branch `cursor/phase-3-4-classifier-feedback-5b99`; routing failures → labeled feedback JSONL + weekly retrain script; smoke offline; PR #8 ready (not draft); self-review (gh comment 403); squash-merged to main. Phase 3 complete → next Phase 4.1. SIGAI docs pushed by parent.
 - **"Phase 3.3 — Auto-escalation (LLM Cost AutoPilot)"** via `/in-cloud` — new cloud agent on branch `cursor/phase-3-3-auto-escalation-7f9c`; escalate-on-failure with latency gate + JSONL; smoke offline; PR ready (not draft); self-review; squash-merge PR #7; SIGAI docs updated by parent (cloud agent 403 on SIGAI-Pilot). Next = Phase 3.4.
 
