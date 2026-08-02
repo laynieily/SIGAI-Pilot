@@ -4,6 +4,7 @@ This project uses Fable (Cursor's coding assistant) guided by a persistent AGENT
 
 ### 2026-08-02
 
+- **"Phase 5.1 — FastAPI POST /v1/completions"** via `/in-cloud` — new cloud agent on branch `cursor/phase-5-1-fastapi-completions-92d7`; router-selected models + audit + TestClient smoke; PR #12 ready (not draft); squash-merged to main. Next Phase 5.2. SIGAI docs pushed by parent.
 - **"Phase 4.3 — Money-shot metric"** via `/in-cloud` — new cloud agent on branch `cursor/phase-4-3-money-shot-metric-0be4`; cost_reduction_pct hero + show_savings CLI; smoke offline; PR #11 ready (not draft); squash-merged to main. Phase 4 complete → next Phase 5.1. SIGAI docs pushed by parent.
 - **"Phase 4.2 — Cost dashboard"** via `/in-cloud` — new cloud agent on branch `cursor/phase-4-2-cost-dashboard-f72f`; metrics + Streamlit dashboard; smoke offline; PR #10 ready (not draft); squash-merged to main. Next Phase 4.3. SIGAI docs pushed by parent.
 - **"Phase 4.1 — Log everything (SQLite audit trail)"** via `/in-cloud` — new cloud agent on branch `cursor/phase-4-1-request-logging-c183`; `app/audit/store.py` + `log_completion` call-site helper; gitignored `data/requests.db`; smoke offline; PR #9 ready (not draft); self-review (gh/ManagePullRequest comment 403); squash-merged to main. Next Phase 4.2. SIGAI docs pushed by parent.
