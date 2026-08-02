@@ -1,35 +1,42 @@
-## Prompts Log
+# Prompts log
 
-This project uses Fable (Cursor's coding assistant) guided by a persistent AGENTS.md context file rather than one-off prompts. Representative prompts are logged below as they come up.
+# Writing standard
+This file uses ASD-STE100 Simplified Technical English (controlled style).
+Quoted user prompts stay in the original words.
+
+## How this log works
+
+This project uses Fable (Cursor coding assistant) with a durable `AGENTS.md` file.
+This log shows sample user prompts and the result of each prompt.
 
 ### 2026-08-02
 
-- **"finish 6.2 here without cloud"** — local Agent mode: wrote `CASE_STUDY.md` leading with **30.6%** vs all GPT-4o; linked from README + portfolio; updated AGENTS.md (Phase 6 complete); SIGAI timeline/issues/prompts for 6.1+6.2.
-- **"Phase 6.1 — Realistic load test"** via `/in-cloud` — n=750 offline load test; reports + **30.6%** headline; PR #15 squash-merged. SIGAI updated by parent with 6.2.
-- **"Phase 5.3 — Containerize & document"** via `/in-cloud` — new cloud agent on branch `cursor/phase-5-3-containerize-document-efcc`; Dockerfile + compose (api/worker) + README savings headline; PR #14 ready (not draft); squash-merged to main. Phase 5 complete → next Phase 6.1. SIGAI docs pushed by parent.
-- **"Phase 5.2 — Config endpoints"** via `/in-cloud` — new cloud agent on branch `cursor/phase-5-2-config-endpoints-aed4`; GET models/stats + GET|PUT routing-config; smoke extended; PR #13 ready (not draft); squash-merged to main. Next Phase 5.3. SIGAI docs pushed by parent.
-- **"Phase 5.1 — FastAPI POST /v1/completions"** via `/in-cloud` — new cloud agent on branch `cursor/phase-5-1-fastapi-completions-92d7`; router-selected models + audit + TestClient smoke; PR #12 ready (not draft); squash-merged to main. Next Phase 5.2. SIGAI docs pushed by parent.
-- **"Phase 4.3 — Money-shot metric"** via `/in-cloud` — new cloud agent on branch `cursor/phase-4-3-money-shot-metric-0be4`; cost_reduction_pct hero + show_savings CLI; smoke offline; PR #11 ready (not draft); squash-merged to main. Phase 4 complete → next Phase 5.1. SIGAI docs pushed by parent.
-- **"Phase 4.2 — Cost dashboard"** via `/in-cloud` — new cloud agent on branch `cursor/phase-4-2-cost-dashboard-f72f`; metrics + Streamlit dashboard; smoke offline; PR #10 ready (not draft); squash-merged to main. Next Phase 4.3. SIGAI docs pushed by parent.
-- **"Phase 4.1 — Log everything (SQLite audit trail)"** via `/in-cloud` — new cloud agent on branch `cursor/phase-4-1-request-logging-c183`; `app/audit/store.py` + `log_completion` call-site helper; gitignored `data/requests.db`; smoke offline; PR #9 ready (not draft); self-review (gh/ManagePullRequest comment 403); squash-merged to main. Next Phase 4.2. SIGAI docs pushed by parent.
-- **"Phase 3.4 — Feedback to classifier (LLM Cost AutoPilot)"** via `/in-cloud` — new cloud agent on branch `cursor/phase-3-4-classifier-feedback-5b99`; routing failures → labeled feedback JSONL + weekly retrain script; smoke offline; PR #8 ready (not draft); self-review (gh comment 403); squash-merged to main. Phase 3 complete → next Phase 4.1. SIGAI docs pushed by parent.
-- **"Phase 3.3 — Auto-escalation (LLM Cost AutoPilot)"** via `/in-cloud` — new cloud agent on branch `cursor/phase-3-3-auto-escalation-7f9c`; escalate-on-failure with latency gate + JSONL; smoke offline; PR ready (not draft); self-review; squash-merge PR #7; SIGAI docs updated by parent (cloud agent 403 on SIGAI-Pilot). Next = Phase 3.4.
+- **"finish 6.2 here without cloud"** — Local Agent mode. The agent wrote `CASE_STUDY.md` with lead number 30.6% vs all GPT-4o. The agent linked README and the portfolio site. The agent updated `AGENTS.md` (Phase 6 complete). The agent updated SIGAI timeline, issues, and prompts for 6.1 and 6.2.
+- **"Phase 6.1 — Realistic load test"** via `/in-cloud` — Offline load test with n=750. Reports and headline 30.6%. PR #15 had a squash merge. The parent updated SIGAI with 6.2.
+- **"Phase 5.3 — Containerize & document"** via `/in-cloud` — New cloud agent on branch `cursor/phase-5-3-containerize-document-efcc`. Outputs: Dockerfile, compose (api/worker), README savings text. PR #14 was ready (not draft) and had a squash merge to `main`. Phase 5 is complete. Next was Phase 6.1. The parent pushed SIGAI docs.
+- **"Phase 5.2 — Config endpoints"** via `/in-cloud` — New cloud agent on branch `cursor/phase-5-2-config-endpoints-aed4`. Outputs: GET models/stats and GET|PUT routing-config. Smoke tests grew. PR #13 was ready (not draft) and had a squash merge to `main`. Next was Phase 5.3. The parent pushed SIGAI docs.
+- **"Phase 5.1 — FastAPI POST /v1/completions"** via `/in-cloud` — New cloud agent on branch `cursor/phase-5-1-fastapi-completions-92d7`. The router selects the model. Audit and TestClient smoke ran. PR #12 was ready (not draft) and had a squash merge to `main`. Next was Phase 5.2. The parent pushed SIGAI docs.
+- **"Phase 4.3 — Money-shot metric"** via `/in-cloud` — New cloud agent on branch `cursor/phase-4-3-money-shot-metric-0be4`. Outputs: `cost_reduction_pct` UI and `show_savings` CLI. Offline smoke ran. PR #11 was ready (not draft) and had a squash merge to `main`. Phase 4 is complete. Next was Phase 5.1. The parent pushed SIGAI docs.
+- **"Phase 4.2 — Cost dashboard"** via `/in-cloud` — New cloud agent on branch `cursor/phase-4-2-cost-dashboard-f72f`. Outputs: metrics and Streamlit dashboard. Offline smoke ran. PR #10 was ready (not draft) and had a squash merge to `main`. Next was Phase 4.3. The parent pushed SIGAI docs.
+- **"Phase 4.1 — Log everything (SQLite audit trail)"** via `/in-cloud` — New cloud agent on branch `cursor/phase-4-1-request-logging-c183`. Outputs: `app/audit/store.py` and `log_completion`. Database `data/requests.db` is gitignored. Offline smoke ran. PR #9 was ready (not draft). Review comment tools returned 403. Squash merge to `main` succeeded. Next was Phase 4.2. The parent pushed SIGAI docs.
+- **"Phase 3.4 — Feedback to classifier (LLM Cost AutoPilot)"** via `/in-cloud` — New cloud agent on branch `cursor/phase-3-4-classifier-feedback-5b99`. Routing failures become labeled feedback JSONL. Weekly retrain script added. Offline smoke ran. PR #8 was ready (not draft). Comment tools returned 403. Squash merge to `main` succeeded. Phase 3 is complete. Next was Phase 4.1. The parent pushed SIGAI docs.
+- **"Phase 3.3 — Auto-escalation (LLM Cost AutoPilot)"** via `/in-cloud` — New cloud agent on branch `cursor/phase-3-3-auto-escalation-7f9c`. Escalate on failure with a latency gate and JSONL. Offline smoke ran. PR was ready (not draft). Self-review ran. PR #7 had a squash merge. The parent updated SIGAI docs (cloud agent got 403 on SIGAI-Pilot). Next was Phase 3.4.
 
 ### 2026-08-01
 
-- **"run the workflow as agents using /in-cloud per phase"** — standing cloud workflow: one new branch + one cloud agent per numbered step; coding-guidelines + security-best-practices before git add/commit/push; pr-review (Bugbot) after each PR; after merge update SIGAI-Pilot `LLM-COST-Autopilot/Viviana-Ayala/{timeline,issues,prompts}.md`. Phase 3.1 → PR #4; Phase 3.2 → PR #5; Phase 3.3 → PR #7; Phase 3.4 → PR #8 (all merged 2026-08-01/02).
-- **"continue" / Phase 3 via `/in-cloud`** — spawned cloud agents per phase step; coding-guidelines + security-best-practices before commit/push; pr-review after each phase; new branch + different agent per step. Phase 3.1 quality thresholds → PR #4 merged. Standing rule: after each phase merges, update these SIGAI-Pilot docs.
-- **"make sure to update issues.md prompts.md and timeline.md in my SIGAI-Pilot files as well after each phase is merged"** — recorded as standing process; parent pushes SIGAI updates when cloud agent lacks write access.
+- **"run the workflow as agents using /in-cloud per phase"** — Standing cloud workflow. One new branch and one cloud agent per numbered step. Run coding-guidelines and security-best-practices before git add, commit, and push. Run pr-review (Bugbot) after each PR. After merge, update SIGAI-Pilot `LLM-COST-Autopilot/Viviana-Ayala/{timeline,issues,prompts}.md`. Phase 3.1 → PR #4. Phase 3.2 → PR #5. Phase 3.3 → PR #7. Phase 3.4 → PR #8. All merged on 2026-08-01 or 2026-08-02.
+- **"continue" / Phase 3 via `/in-cloud`** — Cloud agents for each phase step. Guidelines and security checks before commit and push. PR review after each phase. New branch and different agent per step. Phase 3.1 quality thresholds → PR #4 merged. Standing rule: after each phase merges, update these SIGAI-Pilot docs.
+- **"make sure to update issues.md prompts.md and timeline.md in my SIGAI-Pilot files as well after each phase is merged"** — Standing process. The parent pushes SIGAI updates when the cloud agent has no write access.
 
 ### 2026-07-31 (evening)
 
-- **"do phase 2.4 … /security-best-practices, /coding-guidelines, /pr-review … push to main and SIGAI-Pilot"** — built tier→model routing YAML + loader; ran security + coding-guidelines; opened PR and full pr-review before merge; updated these SIGAI docs.
+- **"do phase 2.4 … /security-best-practices, /coding-guidelines, /pr-review … push to main and SIGAI-Pilot"** — The team made tier-to-model routing YAML and a loader. Security and coding-guidelines ran. The team opened a PR and ran a full pr-review before merge. The team updated these SIGAI docs.
 
 ### 2026-07-31
 
-- **"do phase 2.3 … then /security-best-practices, /coding-guidelines, /pr-review … update SIGAI docs"** — trained logistic regression vs random forest (both 88.2% held-out; LR winner). Ran security + coding-guidelines before commit; opened a PR and reviewed it. Updated these three SIGAI docs.
+- **"do phase 2.3 … then /security-best-practices, /coding-guidelines, /pr-review … update SIGAI docs"** — The team trained logistic regression and random forest. Each model had 88.2% held-out accuracy. Logistic regression is the selected model. Security and coding-guidelines ran before commit. The team opened a PR and reviewed it. The team updated these three SIGAI docs.
 
 ### 2026-07-29
 
-- **"/security-best-practices"** — ran a security review of the repo. Outcome: no critical/high findings; secrets confirmed git-ignored and untracked. Actioned the one real item by pinning `requirements.txt` to exact versions.
-- **"/pr-review 1"** — reviewed PR #1 (Phase 2.2 feature signals). Outcome: approve with nits; the key fix was to stop committing the generated `data/prompt_features.json` (added to `.gitignore` + `git rm --cached`).
+- **"/security-best-practices"** — Security review of the repo. Result: no critical or high findings. Secrets are git-ignored and not tracked. The real fix was to pin `requirements.txt` to exact versions.
+- **"/pr-review 1"** — Review of PR #1 (Phase 2.2 feature signals). Result: approve with small fixes. The key fix: stop commits of generated `data/prompt_features.json` (add to `.gitignore` and run `git rm --cached`).
