@@ -15,5 +15,8 @@
 - Cloud agent `gh pr comment` / ManagePullRequest comment returned 403 “Resource not accessible by integration” on PR #8 → self-review captured in agent report (2026-08-02 Phase 3.4).
 - Cloud agent `gh pr review` / ManagePullRequest `post_comment` returned 403 on PR #9 (Phase 4.1) → self-review captured in agent report; squash-merge via `gh pr merge` succeeded (2026-08-02).
 - Phase 4.1 audit DB stores `prompt_hash` + metrics only (no raw prompts/secrets); `data/requests.db` gitignored; all writes use parameterized SQL (2026-08-02).
+- Phase 4.2 GPT-4o counterfactual: prefer tokens × registry pricing; else 500 in / 250 out fallback when tokens missing (2026-08-02).
+- Phase 4.2 dashboard binds Streamlit to localhost; shows aggregates only (no raw prompts) (2026-08-02).
+- Claude Sonnet list price > GPT-4o → some days actual > counterfactual; overall mix still saves (~37% on demo seed) (2026-08-02).
 
 - Current blockers: none as of 2026-08-02.
