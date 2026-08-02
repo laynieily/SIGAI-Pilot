@@ -22,5 +22,7 @@
 - Phase 4.3 dashboard hero `unsafe_allow_html` only interpolates float/USD aggregates from metrics (no user content) (2026-08-02).
 - Phase 5.1 FastAPI: local/unauthenticated (portfolio); no wildcard CORS; no debug/reload defaults; audit stores prompt_hash only; client `model` field rejected (2026-08-02).
 - Escalation on the completions hot path left as TODO (async verify; don’t block response) (2026-08-02 Phase 5.1).
+- Phase 5.2 `PUT /v1/routing-config` is unauthenticated (portfolio/local); gated by `ALLOW_ROUTING_CONFIG_WRITE` (defaults on) — not a substitute for real auth (2026-08-02).
+- Phase 5.2 routing writes restricted to project `configs/` paths; model keys validated against registry (2026-08-02).
 
 - Current blockers: none as of 2026-08-02.

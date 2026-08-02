@@ -4,6 +4,7 @@ This project uses Fable (Cursor's coding assistant) guided by a persistent AGENT
 
 ### 2026-08-02
 
+- **"Phase 5.2 — Config endpoints"** via `/in-cloud` — new cloud agent on branch `cursor/phase-5-2-config-endpoints-aed4`; GET models/stats + GET|PUT routing-config; smoke extended; PR #13 ready (not draft); squash-merged to main. Next Phase 5.3. SIGAI docs pushed by parent.
 - **"Phase 5.1 — FastAPI POST /v1/completions"** via `/in-cloud` — new cloud agent on branch `cursor/phase-5-1-fastapi-completions-92d7`; router-selected models + audit + TestClient smoke; PR #12 ready (not draft); squash-merged to main. Next Phase 5.2. SIGAI docs pushed by parent.
 - **"Phase 4.3 — Money-shot metric"** via `/in-cloud` — new cloud agent on branch `cursor/phase-4-3-money-shot-metric-0be4`; cost_reduction_pct hero + show_savings CLI; smoke offline; PR #11 ready (not draft); squash-merged to main. Phase 4 complete → next Phase 5.1. SIGAI docs pushed by parent.
 - **"Phase 4.2 — Cost dashboard"** via `/in-cloud` — new cloud agent on branch `cursor/phase-4-2-cost-dashboard-f72f`; metrics + Streamlit dashboard; smoke offline; PR #10 ready (not draft); squash-merged to main. Next Phase 4.3. SIGAI docs pushed by parent.
