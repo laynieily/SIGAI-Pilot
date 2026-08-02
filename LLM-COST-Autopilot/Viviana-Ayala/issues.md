@@ -11,5 +11,7 @@
 - Bugbot on Phase 3.2: substring field coverage false positives; judge parser latching onto scale “1”; label punctuation mismatch → fixed with whole-word match, last in-range number, punctuation strip before merge (2026-08-01).
 - Cloud agent ManagePullRequest `post_comment` failed after merge (PR URL / branch deleted) and `gh pr comment` returned 403 “Resource not accessible by integration” → self-review captured in agent report; parent may re-post if desired (2026-08-02 Phase 3.3).
 - Cloud agent cannot push to `laynieily/SIGAI-Pilot` (403) → parent applies SIGAI doc updates after each merge (2026-08-02).
+- Routing-failure JSONL stores only `prompt_hash` → Phase 3.4 writes training prompts to a separate gitignored `data/feedback_prompts.jsonl` at failure time while the prompt is still in memory (2026-08-02).
+- Cloud agent `gh pr comment` / ManagePullRequest comment returned 403 “Resource not accessible by integration” on PR #8 → self-review captured in agent report (2026-08-02 Phase 3.4).
 
 - Current blockers: none as of 2026-08-02.
