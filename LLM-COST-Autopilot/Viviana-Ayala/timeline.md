@@ -9,7 +9,8 @@ Project repo: https://github.com/Vayala13/LLM-COST-Autopilot.git
 - 2026-07-31 — Phase 2.3: Trained scikit-learn classifiers (logistic regression + random forest) on 11 features / 201 prompts. Both hit 88.2% held-out accuracy. Winner: logistic regression → models/complexity_classifier.joblib. PR #2 reviewed + merged.
 - 2026-07-31 — Phase 2.4: Added configs/routing_map.yaml (Tier 1 → llama-local, Tier 2 → gemini-flash, Tier 3 → claude-sonnet). Implemented app/router/map.py (load_routing_map, model_for_tier, route_prompt) with registry-key validation. Smoke script scripts/show_routing.py. Ran security-best-practices + coding-guidelines, then full pr-review before merge. Phase 2 complete.
 - 2026-08-01 — Phase 3.1: Added configs/quality_thresholds.yaml (extraction field_coverage ≥ 1.0; summarization llm_judge_score > 4/5 with judge claude-sonnet; classification label_agreement == 1.0 with reference claude-sonnet — GPT-4o unavailable while OpenAI disabled). Loader app/quality/thresholds.py; smoke scripts/show_quality_thresholds.py. Cloud agent PR #4, guidelines + security + pr-review, merged to main.
+- 2026-08-01 — Phase 3.2: Async quality verifier — app/quality/verifier.py (field_coverage / llm_judge_score / label_agreement via YAML thresholds + unified send_request); app/quality/queue.py (asyncio enqueue/drain); routing failures → data/routing_failures.jsonl (prompt hashed). Bugbot fixes: whole-word field match, last in-range judge score, label punctuation strip. Cloud agent PR #5, squash-merged to main.
 
 ## Current Status (as of 2026-08-01)
 
-- Phase 3 of 6 — Async Quality Verification Loop. Next: Phase 3.2 — async verifier (queue high-tier comparison after response; score agreement; log routing failures). Cloud agent in flight.
+- Phase 3 of 6 — Async Quality Verification Loop. Next: Phase 3.3 — auto-escalation on caught routing failure (re-run higher-tier; log cost delta / quality gap). Cloud agent in flight.

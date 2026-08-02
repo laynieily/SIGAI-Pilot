@@ -4,8 +4,9 @@ This project uses Fable (Cursor's coding assistant) guided by a persistent AGENT
 
 ### 2026-08-01
 
-- **"continue" / Phase 3 via `/in-cloud`** — spawned cloud agents per phase step; coding-guidelines + security-best-practices before commit/push; pr-review after each phase; new branch + different agent per step. Phase 3.1 quality thresholds → PR #4 merged. Standing rule: after each phase merges, update these SIGAI-Pilot docs (`issues.md`, `prompts.md`, `timeline.md`).
-- **"make sure to update issues.md prompts.md and timeline.md in my SIGAI-Pilot files as well after each phase is merged"** — recorded as standing process; backfilled Phase 3.1 into these three files.
+- **"run the workflow as agents using /in-cloud per phase"** — standing cloud workflow: one new branch + one cloud agent per numbered step; coding-guidelines + security-best-practices before git add/commit/push; pr-review (Bugbot) after each PR; after merge update SIGAI-Pilot `LLM-COST-Autopilot/Viviana-Ayala/{timeline,issues,prompts}.md`. Phase 3.1 → PR #4; Phase 3.2 → PR #5 (merged); Phase 3.3 agent spawned next.
+- **"continue" / Phase 3 via `/in-cloud`** — spawned cloud agents per phase step; coding-guidelines + security-best-practices before commit/push; pr-review after each phase; new branch + different agent per step. Phase 3.1 quality thresholds → PR #4 merged. Standing rule: after each phase merges, update these SIGAI-Pilot docs.
+- **"make sure to update issues.md prompts.md and timeline.md in my SIGAI-Pilot files as well after each phase is merged"** — recorded as standing process; backfilled Phase 3.1 into these three files; Phase 3.2 docs updated after PR #5 merge.
 
 ### 2026-07-31 (evening)
 
