@@ -24,5 +24,7 @@
 - Escalation on the completions hot path left as TODO (async verify; don’t block response) (2026-08-02 Phase 5.1).
 - Phase 5.2 `PUT /v1/routing-config` is unauthenticated (portfolio/local); gated by `ALLOW_ROUTING_CONFIG_WRITE` (defaults on) — not a substitute for real auth (2026-08-02).
 - Phase 5.2 routing writes restricted to project `configs/` paths; model keys validated against registry (2026-08-02).
+- Phase 5.3 compose API is localhost-oriented and unauthenticated — do not expose publicly without real auth; secrets via `.env` only (never baked into image) (2026-08-02).
+- Phase 5.3 worker is not a cross-process verify queue (in-memory asyncio stays in API); worker watches shared `./data` + optional retrain (2026-08-02).
 
 - Current blockers: none as of 2026-08-02.

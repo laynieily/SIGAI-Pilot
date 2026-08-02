@@ -17,7 +17,8 @@ Project repo: https://github.com/Vayala13/LLM-COST-Autopilot.git
 - 2026-08-02 — Phase 4.3: Money-shot metric — `DashboardSummary.cost_reduction_pct` (vs all GPT-4o) as portfolio headline; Streamlit hero large % + $ saved; CLI `python -m scripts.show_savings --demo` (~36.7% on seed). Light README/portfolio mention. Cloud agent PR #11, squash-merged to main. Phase 4 complete.
 - 2026-08-02 — Phase 5.1: FastAPI `POST /v1/completions` — app/api/{main,schemas,completions}.py. Client cannot force model (`extra=forbid`). Pipeline: route_prompt → send_request → log_completion → optional async verify. Smoke scripts/smoke_api.py. Pinned fastapi/uvicorn/httpx. Run: `uvicorn app.api.main:app --host 127.0.0.1 --port 8000`. Cloud agent PR #12, squash-merged to main.
 - 2026-08-02 — Phase 5.2: Config endpoints — `GET /v1/models`, `GET /v1/stats`, `GET|PUT /v1/routing-config` in app/api/config_routes.py. Stats via compute_summary (aggregates only). PUT validates MODEL_REGISTRY keys; save_routing_map writes only under configs/; ALLOW_ROUTING_CONFIG_WRITE gate. Smoke extended in scripts/smoke_api.py. Cloud agent PR #13, squash-merged to main.
+- 2026-08-02 — Phase 5.3: Containerize & document — Dockerfile + docker-compose.yml (api + worker, shared ./data). Honest design: API in-process asyncio verify; worker watches data/ + optional retrain. .env.example; README leads with 36.7% demo savings + architecture diagram. Smoke scripts/smoke_worker.py. Cloud agent PR #14, squash-merged to main. Phase 5 complete.
 
 ## Current Status (as of 2026-08-02)
 
-- Phase 5 of 6 — Expose as an API — **in progress**. Phase 5.2 complete. Next: Phase 5.3 — containerize & document (docker-compose API + worker + SQLite; README architecture + savings). Cloud agent in flight.
+- Phase 6 of 6 — Polish for Portfolio — **next**. Phase 5 complete. Next: Phase 6.1 — realistic load test (500–1,000 prompts; savings report; dashboard screenshot). Cloud agent in flight.
