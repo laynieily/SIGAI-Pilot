@@ -26,5 +26,8 @@
 - Phase 5.2 routing writes restricted to project `configs/` paths; model keys validated against registry (2026-08-02).
 - Phase 5.3 compose API is localhost-oriented and unauthenticated — do not expose publicly without real auth; secrets via `.env` only (never baked into image) (2026-08-02).
 - Phase 5.3 worker is not a cross-process verify queue (in-memory asyncio stays in API); worker watches shared `./data` + optional retrain (2026-08-02).
+- Cloud Agent usage / spend limit hit mid–Phase 5.3 / later runs — finished remaining Phase 6.2 locally without cloud (2026-08-02).
+- Phase 6.1 load test is offline (mocked provider costs from registry); live API $ totals will differ when keys are enabled (2026-08-02).
+- Phase 6.2 quality “parity” framed via escalation rate 3.2% in offline harness + verify/escalate design — not a live LLM-as-judge pass-rate across all 750 (2026-08-02).
 
-- Current blockers: none as of 2026-08-02.
+- Current blockers: none as of 2026-08-02. Build plan complete.
