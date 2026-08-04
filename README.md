@@ -8,8 +8,12 @@ This repository serves as a shared documentation space for all SIGAI project wor
 
 The hub lists every member’s GitHub profile, project repo, SIGAI docs (`timeline.md` / `issues.md` / `prompts.md`), and recent commits from their project repo.
 
+**One-time Pages setup (repo admin — Laynie):**  
+Settings → Pages → **Deploy from a branch** → Branch **`gh-pages`** / folder **`/` (root)** → Save.  
+After that, the link above works.
+
 **How it stays up to date**
-- **Live:** any merge/push to this repo’s `main` branch rebuilds and redeploys the site.
+- **Live:** any merge/push to this repo’s `main` branch rebuilds and redeploys the site to `gh-pages`.
 - **Daily:** a scheduled GitHub Action runs at **08:00 CT** and refreshes recent commit activity from each project repo listed in `team.yaml`.
 
 **How to add or update yourself**
