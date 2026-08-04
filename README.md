@@ -2,6 +2,25 @@
 
 This repository serves as a shared documentation space for all SIGAI project work. Its purpose is to keep our approaches, experiments, and development processes transparent, organized, and easy to reference across the team.
 
+## Team Hub (live site)
+
+**Open the hub:** [https://laynieily.github.io/SIGAI-Pilot/](https://laynieily.github.io/SIGAI-Pilot/)
+
+The hub lists every member’s GitHub profile, project repo, SIGAI docs (`timeline.md` / `issues.md` / `prompts.md`), and recent commits from their project repo.
+
+**How it stays up to date**
+- **Live:** any merge/push to this repo’s `main` branch rebuilds and redeploys the site.
+- **Daily:** a scheduled GitHub Action runs at **08:00 CT** and refreshes recent commit activity from each project repo listed in `team.yaml`.
+
+**How to add or update yourself**
+1. Keep your docs folder updated (`timeline.md`, `issues.md`, `prompts.md`).
+2. Edit [`team.yaml`](team.yaml) if your GitHub username, project repo, or docs path changes.
+3. Merge to `main` — the hub redeploys automatically.
+
+Manual rebuild: GitHub → Actions → **Deploy team hub** → **Run workflow**.
+
+---
+
 Each project has its own dedicated folder, and within each project folder, every team member has a personal documentation space containing three Markdown files:
 
 # Repository Structure
@@ -87,3 +106,4 @@ When starting a new project:
 3. Include the three required Markdown files.
 4. Link the repo to your project in the beginning of timeline.md
 5. Update them regularly as the project progresses.
+6. Add yourself to `team.yaml` so you appear on the [Team Hub](https://laynieily.github.io/SIGAI-Pilot/).

@@ -1,0 +1,44 @@
+# SIGAI-Pilot team hub registry.
+# Edit this file to add/update members. Hub rebuilds on merge to main
+# and daily via GitHub Actions cron.
+
+members:
+  - name: Laynie Avila
+    github: laynieily
+    project_repo: laynieily/agent-orchestration-system
+    docs_path: MultiAgent-Orchestration-System/Laynie
+
+  - name: Luis Chavez
+    github: LuisJC-creator
+    project_repo: LuisJC-creator/LLMCostOptimizer
+    docs_path: ""
+
+  - name: Sasank Panchumarthi
+    github: sasankpanch
+    project_repo: ""
+    docs_path: ""
+
+  - name: Claudia Cassandra
+    github: cloudia-cassandra
+    project_repo: cloudia-cassandra/Orchestra
+    docs_path: Project 15/Cassie
+
+  - name: Jesus Ivan Ibarra
+    github: IvanIbarra18
+    project_repo: IvanIbarra18/Project-15
+    docs_path: MultiAgent-Orchestration-System/Ivan
+
+  - name: Bethany Tijerina
+    github: BethanyTijerina
+    project_repo: BethanyTijerina/LLM-Cost-Autopilot
+    docs_path: LLM-COST-Autopilot/Bethany-Tijerina
+
+  - name: Francisco Izaguirre
+    github: fizagui2
+    project_repo: fizagui2/FinalProject
+    docs_path: Project6/Francisco
+
+  - name: Viviana Ayala
+    github: Vayala13
+    project_repo: Vayala13/LLM-COST-Autopilot
+    docs_path: LLM-COST-Autopilot/Viviana-Ayala
