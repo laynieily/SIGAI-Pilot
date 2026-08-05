@@ -262,3 +262,25 @@ Claude implemented a centralized Tool Registry that manages tool registration, p
 ### Reflection
 
 This session emphasized building infrastructure before enabling complex behaviors. Even though the conditional branches are currently inactive, implementing them early establishes a scalable architecture for future development.
+
+---
+
+> **Note:** From this point on, only prompts that represent a meaningful shift in development strategy are included here. So far, most of the work has followed the same loop: investigate the code, analyze it, fix errors, research implementation details, and trace execution step by step.
+
+## Prompt 9 (Week 3)
+
+### Prompt
+
+Asked what would actually happen if MockLLM were disabled in favor of a real OpenAI key, then proceeded to add real API keys and run the full pipeline end to end.
+
+### Purpose
+
+Validate an architecture that had been built and tested entirely against a deterministic mock, by finally running it against a real, non-deterministic LLM.
+
+### Outcome
+
+The switch immediately surfaced two bugs the mock had been silently hiding: a real chat model returns a structured message object instead of a plain string, and a real LLM's generated plan can legitimately skip a specialist altogether -- which crashed the graph the first time it happened. Both were fixed (a shared text-extraction helper, and making the graph skip missing specialists instead of assuming all four always exist). After the fixes, the pipeline completed a full run against a real model, including a real tool call.
+
+### Reflection
+
+This was the first moment the project's actual behavior diverged from what the mock had predicted. It confirmed that a deterministic mock is great for building structure quickly, but can't substitute for testing against the real variability the system will eventually face -- several "revisit once plans stop being mocked" comments written weeks earlier turned into real, reproducible bugs exactly as anticipated, which validated the habit of flagging assumptions the moment they're made rather than after the fact.
