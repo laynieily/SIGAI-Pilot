@@ -93,14 +93,19 @@ def render_html(members: list[dict], generated_at: str) -> str:
         name = escape(m["name"])
         gh = escape(m["github"])
         repo = m.get("project_repo") or ""
+        project_url = (m.get("project_url") or "").strip()
         commits = m.get("commits") or []
         docs = m.get("docs") or {}
 
-        repo_html = (
-            f'<a href="https://github.com/{escape(repo)}">{escape(repo)}</a>'
-            if repo
-            else "<em>no project repo listed yet</em>"
-        )
+        if project_url:
+            label = project_url.replace("https://github.com/", "")
+            repo_html = f'<a href="{escape(project_url)}">{escape(label)}</a>'
+        elif repo:
+            repo_html = (
+                f'<a href="https://github.com/{escape(repo)}">{escape(repo)}</a>'
+            )
+        else:
+            repo_html = "<em>no project repo listed yet</em>"
         docs_bits = []
         if docs.get("folder"):
             docs_bits.append(f'<a href="{escape(docs["folder"])}">docs folder</a>')

@@ -35,7 +35,8 @@ members:
 
   - name: Francisco Izaguirre
     github: fizagui2
-    project_repo: fizagui2/FinalProject
+    project_repo: ""
+    project_url: https://github.com/laynieily/SIGAI-Pilot/tree/main/Project6/Francisco
     docs_path: Project6/Francisco
 
   - name: Viviana Ayala
