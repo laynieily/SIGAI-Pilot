@@ -21,7 +21,7 @@ members:
   - name: Claudia Cassandra
     github: cloudia-cassandra
     project_repo: cloudia-cassandra/Orchestra
-    docs_path: Project 15/Cassie
+    docs_path: MultiAgent-Orchestration-System/Cassie
 
   - name: Jesus Ivan Ibarra
     github: IvanIbarra18
