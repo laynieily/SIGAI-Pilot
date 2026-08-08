@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIGAI Pilot — Team Hub</title>
+<style>
+  :root {
+    --bg: #0b0d10;
+    --card: #161a20;
+    --ink: #eef1f5;
+    --muted: #8b95a3;
+    --line: #2a313b;
+    --accent: #7dd3fc;
+    --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font);
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+  header h1 { margin: 0 0 0.4rem; font-size: 1.8rem; }
+  header p { color: var(--muted); margin: 0 0 1.5rem; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1rem 1.1rem 1.2rem;
+  }
+  .card h2 { margin: 0 0 0.5rem; font-size: 1.15rem; }
+  .card h3 {
+    margin: 1rem 0 0.4rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .meta { font-size: 0.88rem; color: var(--muted); }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .muted { color: var(--muted); font-size: 0.85rem; }
+  ul.commits { margin: 0; padding-left: 1.1rem; font-size: 0.88rem; }
+  ul.commits li { margin-bottom: 0.35rem; }
+  code { font-family: var(--mono); font-size: 0.85em; }
+  footer {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>SIGAI Pilot — Team Hub</h1>
+      <p>
+        Shared view of every member’s project repo and SIGAI docs.
+        Rebuilds on docs merges to <code>main</code> and daily at 08:00 CT.
+        Source: <a href="https://github.com/laynieily/SIGAI-Pilot">https://github.com/laynieily/SIGAI-Pilot</a>
+      </p>
+    </header>
+    <div class="grid">
+      
+      <article class="card">
+        <h2>Laynie Avila</h2>
+        <p class="meta">
+          <a href="https://github.com/laynieily">@laynieily</a><br>
+          Project: <a href="https://github.com/laynieily/agent-orchestration-system">laynieily/agent-orchestration-system</a><br>
+          Docs: <a href="https://github.com/laynieily/SIGAI-Pilot/tree/main/MultiAgent-Orchestration-System/Laynie">docs folder</a> · <a href="https://github.com/laynieily/SIGAI-Pilot/blob/main/MultiAgent-Orchestration-System/Laynie/timeline.md">timeline.md</a> · <a href="https://github.com/laynieily/SIGAI-Pilot/blob/main/MultiAgent-Orchestration-System/Laynie/issues.md">issues.md</a> · <a href="https://github.com/laynieily/SIGAI-Pilot/blob/main/MultiAgent-Orchestration-System/Laynie/prompts.md">prompts.md</a>
+        </p>
+        <h3>Recent activity</h3>
+        <ul class='commits'><li><a href="https://github.com/laynieily/agent-orchestration-system/commit/1090782622189abd355add8753bfd590b6f5da03"><code>1090782</code></a> completed  graph <span class="muted">2026-08-06</span></li><li><a href="https://github.com/laynieily/agent-orchestration-system/commit/342a6367ff344ab6b8fd2d00e3ef10eeceabcfdc"><code>342a636</code></a> finished all agents and updated mock.py <span class="muted">2026-08-04</span></li><li><a href="https://github.com/laynieily/agent-orchestration-system/commit/4527ce67ac1a6a519db1786dd29d2e72199f9bbf"><code>4527ce6</code></a> fixed some typos <span class="muted">2026-08-03</span></li><li><a href="https://github.com/laynieily/agent-orchestration-system/commit/9699c8b9ca623dab985aa7d7737e02b6ac9631e7"><code>9699c8b</code></a> added tool registry and finished agent models <span class="muted">2026-08-03</span></li><li><a href="https://github.com/laynieily/agent-orchestration-system/commit/5a24b4e9a470531c1b170acf8059c33ca5a34bc5"><code>5a24b4e</code></a> created models <span class="muted">2026-07-31</span></li></ul>
+      </article>
+      <article class="card">
+        <h2>Luis Chavez</h2>
+        <p class="meta">
+          <a href="https://github.com/LuisJC-creator">@LuisJC-creator</a><br>
+          Project: <a href="https://github.com/LuisJC-creator/LLMCostOptimizer">LuisJC-creator/LLMCostOptimizer</a><br>
+          Docs: <em>no SIGAI docs folder yet</em>
+        </p>
+        <h3>Recent activity</h3>
+        <ul class='commits'><li><a href="https://github.com/LuisJC-creator/LLMCostOptimizer/commit/f79e265b5c439386496812b27834aacd375ac800"><code>f79e265</code></a> Docs: router findings, ai_questions formatting, architecture map. <span class="muted">2026-08-03</span></li><li><a href="https://github.com/LuisJC-creator/LLMCostOptimizer/commit/581bde7a38eae85e8bccd6fbf4f072aa36736331"><code>581bde7</code></a> Working progress, still needs updates, switching machines. <span class="muted">2026-08-03</span></li><li><a href="https://github.com/LuisJC-creator/LLMCostOptimizer/commit/89dc6a6e4f01a452ba8a6e723359012fcf6f70e4"><code>89dc6a6</code></a> Config and .env.example. <span class="muted">2026-07-29</span></li><li><a href="https://github.com/LuisJC-creator/LLMCostOptimizer/commit/270d7bdae8b8125cae81bbebb1a9233abe087f62"><code>270d7bd</code></a> Documentation refactor, ai_questions is more concise, documentation offers more nuance. <span class="muted">2026-07-29</span></li><li><a href="https://github.com/LuisJC-creator/LLMCostOptimizer/commit/523cc6cb8fee476af9b28226b189ac7274e83f50"><code>523cc6c</code></a> Current progress update. More soon, logging out for now. <span class="muted">2026-07-28</span></li></ul>
+      </article>
+      <article class="card">
+        <h2>Sasank Panchumarthi</h2>
+        <p class="meta">
+          <a href="https://github.com/sasankpanch">@sasankpanch</a><br>
+          Project: <em>no project repo listed yet</em><br>
+          Docs: <em>no SIGAI docs folder yet</em>
+        </p>
+        <h3>Recent activity</h3>
+        <p class='muted'>No recent commits fetched.</p>
+      </article>
+      <article class="card">
+        <h2>Claudia Cassandra</h2>
+        <p class="meta">
+          <a href="https://github.com/cloudia-cassandra">@cloudia-cassandra</a><br>
+          Project: <a href="https://github.com/cloudia-cassandra/Orchestra">cloudia-cassandra/Orchestra</a><br>
+          Docs: <a href="https://github.com/laynieily/SIGAI-Pilot/tree/main/MultiAgent-Orchestration-System/Cassie">docs folder</a>
+        </p>
+        <h3>Recent activity</h3>
+        <ul class='commits'><li><a href="https://github.com/cloudia-cassandra/Orchestra/commit/3c4f33260c439103cfadf0ecb740be586767e981"><code>3c4f332</code></a> Initial commit <span class="muted">2026-07-23</span></li></ul>
+      </article>
+      <article class="card">
+        <h2>Jesus Ivan Ibarra</h2>
+        <p class="meta">
+          <a href="https://github.com/IvanIbarra18">@IvanIbarra18</a><br>
+          Project: <a href="https://github.com/IvanIbarra18/Project-15">IvanIbarra18/Project-15</a><br>
+          Docs: <a href="https://github.com/laynieily/SIGAI-Pilot/tree/main/MultiAgent-Orchestration-System/Ivan">docs folder</a> · <a href="https://github.com/laynieily/SIGAI-Pilot/blob/main/MultiAgent-Orchestration-System/Ivan/timeline.md">timeline.md</a> · <a href="https://github.com/laynieily/SIGAI-Pilot/blob/main/MultiAgent-Orchestration-System/Ivan/issues.md">issues.md</a> · <a href="https://github.com/laynieily/SIGAI-Pilot/blob/main/MultiAgent-Orchestration-System/Ivan/prompts.md">prompts.md</a>
+        </p>
+        <h3>Recent activity</h3>
+        <ul class='commits'><li><a href="https://github.com/IvanIbarra18/Project-15/commit/72cf5b5ec561a05d30892d4c8a873c80485a1515"><code>72cf5b5</code></a> Phase 1 complete: first successful run with a real LLM - Finished out the full agent hierarchy (Supervisor, Researcher,  <span class="muted">2026-08-05</span></li><li><a href="https://github.com/IvanIbarra18/Project-15/commit/b05eec45a38e8061558a4aaf37544873b7db134a"><code>b05eec4</code></a> Week 2 <span class="muted">2026-07-31</span></li><li><a href="https://github.com/IvanIbarra18/Project-15/commit/9a70aeed9f01f5a3190577eabe1e068f0ca22bb7"><code>9a70aee</code></a> Merge branch &#x27;main&#x27; of https://github.com/IvanIbarra18/Project-15 <span class="muted">2026-07-30</span></li><li><a href="https://github.com/IvanIbarra18/Project-15/commit/8a41be6af7958c8da164cead97516a3bcc0f4ed1"><code>8a41be6</code></a> Initial commit <span class="muted">2026-07-30</span></li><li><a href="https://github.com/IvanIbarra18/Project-15/commit/184f3d188b1ae7777c6f4834eaf13fae710c792b"><code>184f3d1</code></a> Initial commit <span class="muted">2026-07-30</span></li></ul>
+      </article>
+      <article class="card">
+        <h2>Bethany Tijerina</h2>
+        <p class="meta">
+          <a href="https://github.com/BethanyTijerina">@BethanyTijerina</a><br>
+          Project: <a href="https://github.com/BethanyTijerina/LLM-Cost-Autopilot">BethanyTijerina/LLM-Cost-Autopilot</a><br>
+          Docs: <a href="https://github.com/laynieily/SIGAI-Pilot/tree/main/LLM-COST-Autopilot/Bethany-Tijerina">docs folder</a> · <a href="https://github.com/laynieily/SIGAI-Pilot/blob/main/LLM-COST-Autopilot/Bethany-Tijerina/timeline.md">timeline.md</a> · <a href="https://github.com/laynieily/SIGAI-Pilot/blob/main/LLM-COST-Autopilot/Bethany-Tijerina/issues.md">issues.md</a> · <a href="https://github.com/laynieily/SIGAI-Pilot/blob/main/LLM-COST-Autopilot/Bethany-Tijerina/prompts.md">prompts.md</a>
+        </p>
+        <h3>Recent activity</h3>
+        <ul class='commits'><li><a href="https://github.com/BethanyTijerina/LLM-Cost-Autopilot/commit/3203ff22c6658d89ecd66a6b01c5ae348fe22e31"><code>3203ff2</code></a> Add routing logging and improve scoring tests <span class="muted">2026-08-06</span></li><li><a href="https://github.com/BethanyTijerina/LLM-Cost-Autopilot/commit/66e315f51069b5b6f013445dc81782a4cf604431"><code>66e315f</code></a> Replace cost-only routing with quality cost latency scoring <span class="muted">2026-07-31</span></li><li><a href="https://github.com/BethanyTijerina/LLM-Cost-Autopilot/commit/e11ebdd3c9a6f9beecab4b9abbee47bb2e2fe4bc"><code>e11ebdd</code></a> Connect complexity classifier to router and improve routing architecture <span class="muted">2026-07-30</span></li><li><a href="https://github.com/BethanyTijerina/LLM-Cost-Autopilot/commit/91254ee80d9b23c768cbe910dbabbdf4cef3347d"><code>91254ee</code></a> Document complexity classifier development and AI workflow <span class="muted">2026-07-29</span></li><li><a href="https://github.com/BethanyTijerina/LLM-Cost-Autopilot/commit/c7b7926689a33e9a64534ee4a0b45f4619abbd77"><code>c7b7926</code></a> Implement complexity classifier and document AI development process <span class="muted">2026-07-28</span></li></ul>
+      </article>
+      <article class="card">
+        <h2>Francisco Izaguirre</h2>
+        <p class="meta">
+          <a href="https://github.com/fizagui2">@fizagui2</a><br>
+          Project: <a href="https://github.com/laynieily/SIGAI-Pilot/tree/main/Project6/Francisco">laynieily/SIGAI-Pilot/tree/main/Project6/Francisco</a><br>
+          Docs: <a href="https://github.com/laynieily/SIGAI-Pilot/tree/main/Project6/Francisco">docs folder</a> · <a href="https://github.com/laynieily/SIGAI-Pilot/blob/main/Project6/Francisco/timeline.md">timeline.md</a> · <a href="https://github.com/laynieily/SIGAI-Pilot/blob/main/Project6/Francisco/issues.md">issues.md</a> · <a href="https://github.com/laynieily/SIGAI-Pilot/blob/main/Project6/Francisco/prompts.md">prompts.md</a>
+        </p>
+        <h3>Recent activity</h3>
+        <p class='muted'>No recent commits fetched.</p>
+      </article>
+      <article class="card">
+        <h2>Viviana Ayala</h2>
+        <p class="meta">
+          <a href="https://github.com/Vayala13">@Vayala13</a><br>
+          Project: <a href="https://github.com/Vayala13/LLM-COST-Autopilot">Vayala13/LLM-COST-Autopilot</a><br>
+          Docs: <a href="https://github.com/laynieily/SIGAI-Pilot/tree/main/LLM-COST-Autopilot/Viviana-Ayala">docs folder</a> · <a href="https://github.com/laynieily/SIGAI-Pilot/blob/main/LLM-COST-Autopilot/Viviana-Ayala/timeline.md">timeline.md</a> · <a href="https://github.com/laynieily/SIGAI-Pilot/blob/main/LLM-COST-Autopilot/Viviana-Ayala/issues.md">issues.md</a> · <a href="https://github.com/laynieily/SIGAI-Pilot/blob/main/LLM-COST-Autopilot/Viviana-Ayala/prompts.md">prompts.md</a>
+        </p>
+        <h3>Recent activity</h3>
+        <ul class='commits'><li><a href="https://github.com/Vayala13/LLM-COST-Autopilot/commit/bc19a532ad097ef4897acdda19784511e2439011"><code>bc19a53</code></a> Add Phase 6.2 portfolio case study leading with 30.6% savings. (#16) <span class="muted">2026-08-02</span></li><li><a href="https://github.com/Vayala13/LLM-COST-Autopilot/commit/4b60e79306a600eebaab58058af915e03c94d2bd"><code>4b60e79</code></a> Phase 6.1 — Realistic offline load test and portfolio savings artifacts. (#15) <span class="muted">2026-08-02</span></li><li><a href="https://github.com/Vayala13/LLM-COST-Autopilot/commit/9641e86fa66b32dc256a597144dbed787d165b87"><code>9641e86</code></a> Phase 5.3 — Containerize API + worker and document savings (#14) <span class="muted">2026-08-02</span></li><li><a href="https://github.com/Vayala13/LLM-COST-Autopilot/commit/a432e0921c245d9761c8a49f6bf9c7581234d194"><code>a432e09</code></a> docs(agents): add Cursor Cloud dev environment setup notes (#6) <span class="muted">2026-08-02</span></li><li><a href="https://github.com/Vayala13/LLM-COST-Autopilot/commit/5d6f8f965a5bb7bd77777c44b6950b883d879ad6"><code>5d6f8f9</code></a> Add Phase 5.2 config endpoints for models, stats, and routing map. (#13) <span class="muted">2026-08-02</span></li></ul>
+      </article>
+    </div>
+    <footer>
+      Generated 2026-08-08 13:48 UTC ·
+      <a href="https://laynieily.github.io/SIGAI-Pilot/">https://laynieily.github.io/SIGAI-Pilot/</a>
+    </footer>
+  </div>
+</body>
+</html>

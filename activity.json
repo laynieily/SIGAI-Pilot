@@ -1,0 +1,223 @@
+{
+  "generated_at": "2026-08-08 13:48 UTC",
+  "members": [
+    {
+      "name": "Laynie Avila",
+      "github": "laynieily",
+      "project_repo": "laynieily/agent-orchestration-system",
+      "docs_path": "MultiAgent-Orchestration-System/Laynie",
+      "commits": [
+        {
+          "sha": "1090782",
+          "message": "completed  graph",
+          "date": "2026-08-06T13:16:54Z",
+          "url": "https://github.com/laynieily/agent-orchestration-system/commit/1090782622189abd355add8753bfd590b6f5da03"
+        },
+        {
+          "sha": "342a636",
+          "message": "finished all agents and updated mock.py",
+          "date": "2026-08-04T15:07:49Z",
+          "url": "https://github.com/laynieily/agent-orchestration-system/commit/342a6367ff344ab6b8fd2d00e3ef10eeceabcfdc"
+        },
+        {
+          "sha": "4527ce6",
+          "message": "fixed some typos",
+          "date": "2026-08-03T15:27:55Z",
+          "url": "https://github.com/laynieily/agent-orchestration-system/commit/4527ce67ac1a6a519db1786dd29d2e72199f9bbf"
+        },
+        {
+          "sha": "9699c8b",
+          "message": "added tool registry and finished agent models",
+          "date": "2026-08-03T15:23:42Z",
+          "url": "https://github.com/laynieily/agent-orchestration-system/commit/9699c8b9ca623dab985aa7d7737e02b6ac9631e7"
+        },
+        {
+          "sha": "5a24b4e",
+          "message": "created models",
+          "date": "2026-07-31T04:00:51Z",
+          "url": "https://github.com/laynieily/agent-orchestration-system/commit/5a24b4e9a470531c1b170acf8059c33ca5a34bc5"
+        }
+      ]
+    },
+    {
+      "name": "Luis Chavez",
+      "github": "LuisJC-creator",
+      "project_repo": "LuisJC-creator/LLMCostOptimizer",
+      "docs_path": "",
+      "commits": [
+        {
+          "sha": "f79e265",
+          "message": "Docs: router findings, ai_questions formatting, architecture map.",
+          "date": "2026-08-03T17:09:55Z",
+          "url": "https://github.com/LuisJC-creator/LLMCostOptimizer/commit/f79e265b5c439386496812b27834aacd375ac800"
+        },
+        {
+          "sha": "581bde7",
+          "message": "Working progress, still needs updates, switching machines.",
+          "date": "2026-08-03T04:24:51Z",
+          "url": "https://github.com/LuisJC-creator/LLMCostOptimizer/commit/581bde7a38eae85e8bccd6fbf4f072aa36736331"
+        },
+        {
+          "sha": "89dc6a6",
+          "message": "Config and .env.example.",
+          "date": "2026-07-29T16:20:38Z",
+          "url": "https://github.com/LuisJC-creator/LLMCostOptimizer/commit/89dc6a6e4f01a452ba8a6e723359012fcf6f70e4"
+        },
+        {
+          "sha": "270d7bd",
+          "message": "Documentation refactor, ai_questions is more concise, documentation offers more nuance.",
+          "date": "2026-07-29T15:29:41Z",
+          "url": "https://github.com/LuisJC-creator/LLMCostOptimizer/commit/270d7bdae8b8125cae81bbebb1a9233abe087f62"
+        },
+        {
+          "sha": "523cc6c",
+          "message": "Current progress update. More soon, logging out for now.",
+          "date": "2026-07-28T19:34:32Z",
+          "url": "https://github.com/LuisJC-creator/LLMCostOptimizer/commit/523cc6cb8fee476af9b28226b189ac7274e83f50"
+        }
+      ]
+    },
+    {
+      "name": "Sasank Panchumarthi",
+      "github": "sasankpanch",
+      "project_repo": "",
+      "docs_path": "",
+      "commits": []
+    },
+    {
+      "name": "Claudia Cassandra",
+      "github": "cloudia-cassandra",
+      "project_repo": "cloudia-cassandra/Orchestra",
+      "docs_path": "MultiAgent-Orchestration-System/Cassie",
+      "commits": [
+        {
+          "sha": "3c4f332",
+          "message": "Initial commit",
+          "date": "2026-07-23T04:45:07Z",
+          "url": "https://github.com/cloudia-cassandra/Orchestra/commit/3c4f33260c439103cfadf0ecb740be586767e981"
+        }
+      ]
+    },
+    {
+      "name": "Jesus Ivan Ibarra",
+      "github": "IvanIbarra18",
+      "project_repo": "IvanIbarra18/Project-15",
+      "docs_path": "MultiAgent-Orchestration-System/Ivan",
+      "commits": [
+        {
+          "sha": "72cf5b5",
+          "message": "Phase 1 complete: first successful run with a real LLM - Finished out the full agent hierarchy (Supervisor, Researcher, ",
+          "date": "2026-08-05T03:14:18Z",
+          "url": "https://github.com/IvanIbarra18/Project-15/commit/72cf5b5ec561a05d30892d4c8a873c80485a1515"
+        },
+        {
+          "sha": "b05eec4",
+          "message": "Week 2",
+          "date": "2026-07-31T23:15:00Z",
+          "url": "https://github.com/IvanIbarra18/Project-15/commit/b05eec45a38e8061558a4aaf37544873b7db134a"
+        },
+        {
+          "sha": "9a70aee",
+          "message": "Merge branch 'main' of https://github.com/IvanIbarra18/Project-15",
+          "date": "2026-07-30T22:20:09Z",
+          "url": "https://github.com/IvanIbarra18/Project-15/commit/9a70aeed9f01f5a3190577eabe1e068f0ca22bb7"
+        },
+        {
+          "sha": "8a41be6",
+          "message": "Initial commit",
+          "date": "2026-07-30T22:19:31Z",
+          "url": "https://github.com/IvanIbarra18/Project-15/commit/8a41be6af7958c8da164cead97516a3bcc0f4ed1"
+        },
+        {
+          "sha": "184f3d1",
+          "message": "Initial commit",
+          "date": "2026-07-30T20:45:23Z",
+          "url": "https://github.com/IvanIbarra18/Project-15/commit/184f3d188b1ae7777c6f4834eaf13fae710c792b"
+        }
+      ]
+    },
+    {
+      "name": "Bethany Tijerina",
+      "github": "BethanyTijerina",
+      "project_repo": "BethanyTijerina/LLM-Cost-Autopilot",
+      "docs_path": "LLM-COST-Autopilot/Bethany-Tijerina",
+      "commits": [
+        {
+          "sha": "3203ff2",
+          "message": "Add routing logging and improve scoring tests",
+          "date": "2026-08-06T08:40:12Z",
+          "url": "https://github.com/BethanyTijerina/LLM-Cost-Autopilot/commit/3203ff22c6658d89ecd66a6b01c5ae348fe22e31"
+        },
+        {
+          "sha": "66e315f",
+          "message": "Replace cost-only routing with quality cost latency scoring",
+          "date": "2026-07-31T04:38:06Z",
+          "url": "https://github.com/BethanyTijerina/LLM-Cost-Autopilot/commit/66e315f51069b5b6f013445dc81782a4cf604431"
+        },
+        {
+          "sha": "e11ebdd",
+          "message": "Connect complexity classifier to router and improve routing architecture",
+          "date": "2026-07-30T04:08:53Z",
+          "url": "https://github.com/BethanyTijerina/LLM-Cost-Autopilot/commit/e11ebdd3c9a6f9beecab4b9abbee47bb2e2fe4bc"
+        },
+        {
+          "sha": "91254ee",
+          "message": "Document complexity classifier development and AI workflow",
+          "date": "2026-07-29T02:59:30Z",
+          "url": "https://github.com/BethanyTijerina/LLM-Cost-Autopilot/commit/91254ee80d9b23c768cbe910dbabbdf4cef3347d"
+        },
+        {
+          "sha": "c7b7926",
+          "message": "Implement complexity classifier and document AI development process",
+          "date": "2026-07-28T05:44:05Z",
+          "url": "https://github.com/BethanyTijerina/LLM-Cost-Autopilot/commit/c7b7926689a33e9a64534ee4a0b45f4619abbd77"
+        }
+      ]
+    },
+    {
+      "name": "Francisco Izaguirre",
+      "github": "fizagui2",
+      "project_repo": "",
+      "docs_path": "Project6/Francisco",
+      "commits": []
+    },
+    {
+      "name": "Viviana Ayala",
+      "github": "Vayala13",
+      "project_repo": "Vayala13/LLM-COST-Autopilot",
+      "docs_path": "LLM-COST-Autopilot/Viviana-Ayala",
+      "commits": [
+        {
+          "sha": "bc19a53",
+          "message": "Add Phase 6.2 portfolio case study leading with 30.6% savings. (#16)",
+          "date": "2026-08-02T19:28:28Z",
+          "url": "https://github.com/Vayala13/LLM-COST-Autopilot/commit/bc19a532ad097ef4897acdda19784511e2439011"
+        },
+        {
+          "sha": "4b60e79",
+          "message": "Phase 6.1 \u2014 Realistic offline load test and portfolio savings artifacts. (#15)",
+          "date": "2026-08-02T18:57:57Z",
+          "url": "https://github.com/Vayala13/LLM-COST-Autopilot/commit/4b60e79306a600eebaab58058af915e03c94d2bd"
+        },
+        {
+          "sha": "9641e86",
+          "message": "Phase 5.3 \u2014 Containerize API + worker and document savings (#14)",
+          "date": "2026-08-02T18:53:19Z",
+          "url": "https://github.com/Vayala13/LLM-COST-Autopilot/commit/9641e86fa66b32dc256a597144dbed787d165b87"
+        },
+        {
+          "sha": "a432e09",
+          "message": "docs(agents): add Cursor Cloud dev environment setup notes (#6)",
+          "date": "2026-08-02T06:41:40Z",
+          "url": "https://github.com/Vayala13/LLM-COST-Autopilot/commit/a432e0921c245d9761c8a49f6bf9c7581234d194"
+        },
+        {
+          "sha": "5d6f8f9",
+          "message": "Add Phase 5.2 config endpoints for models, stats, and routing map. (#13)",
+          "date": "2026-08-02T00:50:43Z",
+          "url": "https://github.com/Vayala13/LLM-COST-Autopilot/commit/5d6f8f965a5bb7bd77777c44b6950b883d879ad6"
+        }
+      ]
+    }
+  ]
+}
