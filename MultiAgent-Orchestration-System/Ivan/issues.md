@@ -157,3 +157,53 @@ Updated the lookup to skip gracefully when a specialist isn't needed, instead of
 A real model won't always follow the same fixed pattern a hardcoded mock does — the system needs to tolerate that variation.
 
 ---
+
+
+
+
+
+
+
+
+---
+
+## Issue: Proposed Fixes for Hallucinated Answers Didn't Hold Up to Scrutiny (Week 4)
+
+### Problem
+
+The first suggested fixes for the LLM inventing technical specs — having it hedge with "this is only an approximation," and reading more raw text from search results — both sounded reasonable but didn't actually solve the problem.
+
+### Investigation
+
+Questioned each proposal before implementing it. Ran a controlled test with only the hedging instruction changed, and manually opened the pages driving the raw-text idea, to see what each fix would realistically accomplish.
+
+### Resolution
+
+The hedging instruction alone was too easy to satisfy without really fixing anything, and reading more text mostly just meant reading more navigation menu. Replaced both with something backed by evidence: a stricter no-loophole instruction, and a filter built after testing showed what was actually eating the character budget.
+
+### Lessons Learned
+
+A fix that sounds reasonable isn't the same as a fix that's been tested against the actual failure.
+
+---
+
+## Issue: Web Search Still Doesn't Reliably Get the System Real Information
+
+### Problem
+
+Even after adding a way to read full page content instead of just search snippets, the system still regularly answers with either invented specifics or an honest "I don't know" — both cases where the real answer was sitting on the page it fetched.
+
+### Investigation
+
+Opened the same source pages by hand and confirmed the requested information was present in plain text, not hidden behind anything unusual. The real problem is how much of the fetched page is navigation clutter versus actual content, which varies a lot page to page.
+
+### Resolution
+
+Improved the filtering enough to cut a meaningful amount of that clutter, but it's a heuristic, not a guarantee — it still fails on some pages.
+
+### Lessons Learned
+
+This isn't solved yet. A proper fix would need a dedicated content-extraction approach, not more tuning of a quick filter.
+
+---
+

@@ -108,3 +108,42 @@
 
 - Continued tracing errors back to their root cause instead of guessing at fixes.
 - Used a small real-money test to validate the system functionality.
+
+---
+
+## Week 4 - August 13, 2026
+
+### Architecture Analysis
+
+- Studied how Redis and ChromaDB fit into the system, and what actually separates short-term working memory from long-term semantic memory.
+- Learned how semantic search works under the hood, connecting it back to embeddings.
+- Audited Phase 2 against the codebase and scoped what could realistically be built in one session.
+- Cross-checked a parallel conversation with ChatGPT against the real implementation to confirm the concepts actually held up.
+
+### Implementation
+
+- Built short-term working memory with a graceful fallback when no external store is configured, mirroring how the LLM provider already falls back to a mock.
+- Built long-term semantic memory that persists lessons across tasks and gets queried before planning a new one.
+- Added memory scoring, consolidation, and expiration, plus small scripts to inspect and delete stored memories.
+- Wired memory reads and writes into the existing pipeline without disrupting prior behavior.
+- Gave the research step a way to fetch real page content instead of only search-result snippets.
+
+### Debugging & Fixes
+
+- Fixed a shared-reference bug where the fallback memory store leaked data between unrelated tasks.
+- Fixed two mistranscribed package versions blocking installation, one of which caused a real dependency conflict.
+- Traced why a real query about current GPUs kept returning confident, plausible-looking, and wrong technical specs. (Using an testing prompt)
+- Found that a simple text-length filter barely reduced page noise, and rebuilt it after testing showed why.
+
+### Design Decisions
+
+- Refused to accept the first proposed fix for hallucinated answers and instead ran a controlled test isolating whether the cause was missing data or missing instructions.
+- Split the reviewer's judgment into two separate checks — writing quality and whether claims are backed by a source — so a well-written answer can still get flagged.
+- Decided only reviewed and approved results get saved to memory, so unverified answers can't become a trusted precedent later.
+- Connected the plan's declared task order to how the system actually executes it, instead of relying on a fixed sequence.
+
+### AI Workflow Improvement
+
+- Pushed back on proposed solutions and demanded root-cause analysis before allowing any implementation, which changed the fix that was eventually built.
+- Verified a technical claim by opening the real source page myself, catching a case where an explanation didn't fully match reality.
+- Kept the same discipline from previous weeks: trace problems to their root cause instead of guessing at fixes.

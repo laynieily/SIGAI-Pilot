@@ -284,3 +284,31 @@ The switch immediately surfaced two bugs the mock had been silently hiding: a re
 ### Reflection
 
 This was the first moment the project's actual behavior diverged from what the mock had predicted. It confirmed that a deterministic mock is great for building structure quickly, but can't substitute for testing against the real variability the system will eventually face -- several "revisit once plans stop being mocked" comments written weeks earlier turned into real, reproducible bugs exactly as anticipated, which validated the habit of flagging assumptions the moment they're made rather than after the fact.
+
+---
+
+---
+
+# Prompt Engineering Experiment (Week 4)
+
+## Experiment
+
+Instead of accepting the first proposed fix whenever something went wrong, I pushed back and asked for a deeper root-cause analysis before letting any change touch the code. The goal was to see whether requiring evidence up front, instead of trusting the first plausible-sounding explanation, would lead to better decisions and catch weak fixes before they got built.
+
+### Goal
+
+Slow down before implementing. Require proof that a proposed fix addresses the actual cause, not just a symptom.
+
+### Pattern
+
+This pushback showed up several times over the session:
+
+- When the LLM kept inventing GPU specs (when using test prompt), the first proposed fix was to make it say "I'm not sure, so this is only an approximation" instead of stating facts confidently. I pushed back that this only softened the problem instead of solving it, and asked to first determine whether the cause was missing data or missing instructions before deciding what to build.
+- When search results weren't giving the model enough real content, the proposed fix was to just read more characters from each page. I refused to implement that, questioning whether reading more raw text was actually efficient, since most of a heavy website is navigation menu, not real content — that refusal led to a proper filter instead of a blind size increase.
+- Once real page content was being fetched, I manually opened the same web pages myself to confirm whether the information the task needed was actually present, instead of trusting an explanation of why the model might be failing.
+- Raised the question of whether records saved to long-term memory during active development and testing should be purged, since early test runs had stored answers that were later proven wrong.
+- Asked directly whether a plan's declared task dependencies were actually driving execution order or just decorative — which led to that being properly wired in, though I'm still not fully sure yet how much it changes in practice.
+
+### Outcome
+
+Every one of these pushes changed what actually got built compared to the first version proposed: an isolated experiment to separate a data problem from an instruction problem, a smarter content filter instead of a bigger one, and a verification step in the reviewer that didn't exist in the first draft. Requiring evidence before implementing slowed the session down, but caught at least two fixes that would not have actually worked.
