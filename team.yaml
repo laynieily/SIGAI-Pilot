@@ -1,6 +1,7 @@
 # SIGAI-Pilot team hub registry.
-# Edit this file to add/update members. Hub rebuilds on merge to main
-# and daily via GitHub Actions cron.
+# Used to build an activity *snapshot* (sorted by latest update), not a
+# static directory. Hub rebuilds on merge to main and daily via cron.
+# Optional fields: project_url (override project link), docs_path (SIGAI notes).
 
 members:
   - name: Laynie Avila

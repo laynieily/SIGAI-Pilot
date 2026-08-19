@@ -6,7 +6,7 @@ This repository serves as a shared documentation space for all SIGAI project wor
 
 **Open the hub:** [https://laynieily.github.io/SIGAI-Pilot/](https://laynieily.github.io/SIGAI-Pilot/)
 
-The hub lists every member’s GitHub profile, project repo, SIGAI docs (`timeline.md` / `issues.md` / `prompts.md`), and recent commits from their project repo.
+The hub is an **activity snapshot** of the community — who moved recently, what they last shipped — so people can work independently while staying aware of each other. Members are **sorted by latest update** (code commits or SIGAI docs), with freshness badges (`updated today` / `this week` / `quiet lately`), not listed as a flat directory.
 
 **One-time Pages setup (repo admin — Laynie):**  
 Settings → Pages → **Deploy from a branch** → Branch **`gh-pages`** / folder **`/` (root)** → Save.  

@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Build the SIGAI-Pilot team hub static site.
 
-Reads team.yaml, optionally fetches recent commits for each project_repo via
-the GitHub API, and writes site/index.html + site/activity.json.
+Reads team.yaml, fetches recent commits for each project_repo via the GitHub
+API, and writes site/activity.json. The page itself is the tracked static file
+hub/index.html, copied to site/ as-is — it renders entirely from activity.json
+in the browser, so there is no HTML templating here.
 
 Run:
     python3 scripts/build_hub.py
@@ -12,10 +14,10 @@ from __future__ import annotations
 
 import json
 import os
+import shutil
 import urllib.error
 import urllib.request
 from datetime import datetime, timezone
-from html import escape
 from pathlib import Path
 
 try:
@@ -26,6 +28,7 @@ except ImportError as e:
 ROOT = Path(__file__).resolve().parent.parent
 TEAM_PATH = ROOT / "team.yaml"
 SITE_DIR = ROOT / "site"
+PAGE_PATH = ROOT / "hub" / "index.html"
 HUB_URL = "https://laynieily.github.io/SIGAI-Pilot/"
 REPO_URL = "https://github.com/laynieily/SIGAI-Pilot"
 
@@ -82,145 +85,43 @@ def docs_links(docs_path: str) -> dict[str, str]:
     return links
 
 
+def status_note(docs_path: str) -> dict[str, str | bool]:
+    """Read the trailing '## Current status' block from a member's timeline.md.
+
+    Members already write this by hand; treating it as the status source beats
+    maintaining a separate flag. 'complete'/'done' in the block marks the
+    project wrapped.
+    """
+    if not docs_path:
+        return {}
+    path = ROOT / docs_path / "timeline.md"
+    if not path.exists():
+        return {}
+    text = path.read_text(encoding="utf-8", errors="replace")
+    marker = text.lower().rfind("## current status")
+    if marker == -1:
+        return {}
+    block = text[marker:].split("\n", 1)[1] if "\n" in text[marker:] else ""
+    lines = [
+        ln.strip().lstrip("-* ").strip()
+        for ln in block.splitlines()
+        if ln.strip() and not ln.strip().startswith("#")
+    ]
+    if not lines:
+        return {}
+    joined = " ".join(lines).lower()
+    return {
+        "note": lines[0][:200],
+        "as_of": text[marker:].split("\n", 1)[0].strip("# ").strip(),
+        "done": ("all six phases are complete" in joined)
+        or ("all phases are complete" in joined)
+        or ("project complete" in joined),
+    }
+
+
 def load_team() -> list[dict]:
     data = yaml.safe_load(TEAM_PATH.read_text())
     return list(data.get("members") or [])
-
-
-def render_html(members: list[dict], generated_at: str) -> str:
-    cards = []
-    for m in members:
-        name = escape(m["name"])
-        gh = escape(m["github"])
-        repo = m.get("project_repo") or ""
-        project_url = (m.get("project_url") or "").strip()
-        commits = m.get("commits") or []
-        docs = m.get("docs") or {}
-
-        if project_url:
-            label = project_url.replace("https://github.com/", "")
-            repo_html = f'<a href="{escape(project_url)}">{escape(label)}</a>'
-        elif repo:
-            repo_html = (
-                f'<a href="https://github.com/{escape(repo)}">{escape(repo)}</a>'
-            )
-        else:
-            repo_html = "<em>no project repo listed yet</em>"
-        docs_bits = []
-        if docs.get("folder"):
-            docs_bits.append(f'<a href="{escape(docs["folder"])}">docs folder</a>')
-        for key in ("timeline.md", "issues.md", "prompts.md"):
-            if docs.get(key):
-                docs_bits.append(f'<a href="{escape(docs[key])}">{escape(key)}</a>')
-        docs_html = " · ".join(docs_bits) if docs_bits else "<em>no SIGAI docs folder yet</em>"
-
-        if commits:
-            commit_lis = "".join(
-                f'<li><a href="{escape(c["url"])}"><code>{escape(c["sha"])}</code></a> '
-                f'{escape(c["message"])} '
-                f'<span class="muted">{escape((c["date"] or "")[:10])}</span></li>'
-                for c in commits
-            )
-            activity = f"<ul class='commits'>{commit_lis}</ul>"
-        else:
-            activity = "<p class='muted'>No recent commits fetched.</p>"
-
-        cards.append(f"""
-      <article class="card">
-        <h2>{name}</h2>
-        <p class="meta">
-          <a href="https://github.com/{gh}">@{gh}</a><br>
-          Project: {repo_html}<br>
-          Docs: {docs_html}
-        </p>
-        <h3>Recent activity</h3>
-        {activity}
-      </article>""")
-
-    return f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SIGAI Pilot — Team Hub</title>
-<style>
-  :root {{
-    --bg: #0b0d10;
-    --card: #161a20;
-    --ink: #eef1f5;
-    --muted: #8b95a3;
-    --line: #2a313b;
-    --accent: #7dd3fc;
-    --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
-    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  }}
-  * {{ box-sizing: border-box; }}
-  body {{
-    margin: 0;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: var(--font);
-    line-height: 1.5;
-  }}
-  .wrap {{ max-width: 1100px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }}
-  header h1 {{ margin: 0 0 0.4rem; font-size: 1.8rem; }}
-  header p {{ color: var(--muted); margin: 0 0 1.5rem; }}
-  .grid {{
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1rem;
-  }}
-  .card {{
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 1rem 1.1rem 1.2rem;
-  }}
-  .card h2 {{ margin: 0 0 0.5rem; font-size: 1.15rem; }}
-  .card h3 {{
-    margin: 1rem 0 0.4rem;
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }}
-  .meta {{ font-size: 0.88rem; color: var(--muted); }}
-  a {{ color: var(--accent); text-decoration: none; }}
-  a:hover {{ text-decoration: underline; }}
-  .muted {{ color: var(--muted); font-size: 0.85rem; }}
-  ul.commits {{ margin: 0; padding-left: 1.1rem; font-size: 0.88rem; }}
-  ul.commits li {{ margin-bottom: 0.35rem; }}
-  code {{ font-family: var(--mono); font-size: 0.85em; }}
-  footer {{
-    margin-top: 2rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--line);
-    color: var(--muted);
-    font-size: 0.8rem;
-  }}
-</style>
-</head>
-<body>
-  <div class="wrap">
-    <header>
-      <h1>SIGAI Pilot — Team Hub</h1>
-      <p>
-        Shared view of every member’s project repo and SIGAI docs.
-        Rebuilds on docs merges to <code>main</code> and daily at 08:00 CT.
-        Source: <a href="{REPO_URL}">{REPO_URL}</a>
-      </p>
-    </header>
-    <div class="grid">
-      {"".join(cards)}
-    </div>
-    <footer>
-      Generated {escape(generated_at)} ·
-      <a href="{HUB_URL}">{HUB_URL}</a>
-    </footer>
-  </div>
-</body>
-</html>
-"""
 
 
 def main() -> None:
@@ -236,6 +137,7 @@ def main() -> None:
         print(f"- {m['name']}: repo={repo or '(none)'} docs={docs_path or '(none)'}")
         entry["commits"] = fetch_commits(repo, token)
         entry["docs"] = docs_links(docs_path)
+        entry["status_note"] = status_note(docs_path)
         enriched.append(entry)
 
     generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
@@ -248,15 +150,33 @@ def main() -> None:
                 "github": m["github"],
                 "project_repo": m.get("project_repo") or "",
                 "docs_path": m.get("docs_path") or "",
+                # Which standard docs actually exist on disk, e.g. ["timeline.md", "issues.md"].
+                "docs_present": [
+                    k for k in ("timeline.md", "issues.md", "prompts.md")
+                    if (m.get("docs") or {}).get(k)
+                ],
+                # Status comes from the member's own timeline.md "## Current status"
+                # block; "status: done" in team.yaml overrides it.
+                "status": "done"
+                if (m.get("status") or "").strip().lower() == "done"
+                or (m.get("status_note") or {}).get("done")
+                else (m.get("status") or "").strip().lower(),
+                "status_note": (m.get("status_note") or {}).get("note", ""),
+                "status_as_of": (m.get("status_note") or {}).get("as_of", ""),
+                "project_url": m.get("project_url") or "",
                 "commits": m.get("commits") or [],
             }
             for m in enriched
         ],
     }
     (SITE_DIR / "activity.json").write_text(json.dumps(activity, indent=2) + "\n")
-    (SITE_DIR / "index.html").write_text(render_html(enriched, generated_at))
-    print(f"Wrote {SITE_DIR / 'index.html'}")
     print(f"Wrote {SITE_DIR / 'activity.json'}")
+
+    if PAGE_PATH.exists():
+        shutil.copyfile(PAGE_PATH, SITE_DIR / "index.html")
+        print(f"Copied {PAGE_PATH.relative_to(ROOT)} → {SITE_DIR / 'index.html'}")
+    else:
+        raise SystemExit(f"Missing {PAGE_PATH.relative_to(ROOT)} — the hub page is tracked there.")
 
 
 if __name__ == "__main__":
