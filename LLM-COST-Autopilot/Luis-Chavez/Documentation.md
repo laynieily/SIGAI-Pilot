@@ -113,4 +113,95 @@ I don't have an API key yet, so I was planning with Claude on how to move forwar
 
 **Questions resolved:** 1-2026-07-29, 2-2026-07-29, 3-2026-07-29.
 
+---
 
+### [LC] Entry — 8-19-2026
+
+**Commit:** Catch-up: items 9-17, test suite, evaluation harness, live Anthropic verification.
+
+**What I was doing:**
+Catching up on the several sessions that went unrecorded. Commit work over the past two weeks has been poorly recorded due to
+a family emergency. This one entry covers the changes.
+
+**What happened (error, success, decision):**
+First thing that happened was the project not running cross platform. All four demo prompts
+failed, not the two architecture.md recorded on 08-03. None of the setup had
+ever been written down, so it's in the README now.
+
+Closed items 9 and 10, both found on 08-03 tracing router.py line by line.
+Item 9: classify() returns a Classification record instead of (tier, prose),
+so both signals are recorded instead of the keyword hit masking the length one.
+The question it existed to answer came back yes, the 400-char rule caught
+prompt 4, which the keyword list missed. Item 10: tier is an ordered IntEnum
+and escalation is one loop over a ladder. Confirmed the latent bug by
+replaying the old logic against a synthetic three-tier registry which returned no answer and false.
+
+Added the first test suite: 81 tests, stdlib unittest, no network, ~13ms.
+Tests now specifically because items 9 and 10 were both defects that reading
+the code had already failed to catch once. Item 10 was invisible in a two-tier
+registry, it needed a third tier to surface, which is something a test can
+construct and a code review cannot.
+
+Got an API key and _send_anthropic made its first real request. The response
+shape matched what the docs assumed, so no code change was needed, and
+plan.md build-order step 4 is demonstrated rather than asserted. Two things:
+the alias claude-haiku-4-5 resolves to claude-haiku-4-5-20251001, which is
+exactly the reason the adapter's "read model from the reply" decision was written
+for. max_tokens=1000 truncated both hosted answers mid-sentence while
+billing the full cap.
+
+The savings figure went from 100% to 2%. The 100% was a nonsense AI artifact, obviously you save 100% on a free local model.
+Tthe 2% measures the corpus, not the implementation. 
+Short questions are inexpensive everywhere, so sending them to a free model saves
+a rounding error while the two expensive calls carry the entire bill. What that
+says is that savings live in the prompts that *look* expensive but a cheap model
+could have handled, and this router never finds those, because it decides before
+the call and never checks the answer.
+
+Asked ten audit questions about features and implementation.
+Six became work items (12-17) and five got built:
+13 (context window vs. complexity: these had been conflated, and the local
+model turned out to be served a fraction of its advertised 131072-token window
+because nothing was sending num_ctx), 14 (truncation and dropped content
+blocks), 15 (routing accuracy), 16 (an empty reply used to count as a
+successful answer), and 17 (pricing had no date or source, so every cost figure
+was unfalsifiable).
+
+Item 15 is the one that matters. 30 hand-labelled prompts, graded offline
+because classify() is a pure function — no network, no key, no cost. It scores
+50%, which on a binary decision is a coin flip, but the breakdown is the real
+result: 100% on the obvious prompts and 0% on every adversarial category. All
+six short-but-hard prompts ("Why is my mutex deadlocking?", "Is this SQL
+injection safe?") route CHEAP, because they're under 400 characters and contain
+no keyword. That's the 07-31 failure reproduced six times on demand instead of
+once by accident. Caveat: the labels were written by Claude, not me, so the
+number is provisional until I review them — AI-authored ground truth grading an
+AI-assisted router is circular and the file says so at the top.
+
+Item 12 — actually measuring whether an answer was any good — I left unbuilt on
+purpose. A half-working quality metric would be worse than none, because it
+would license exactly the confident savings claims this project is trying not to
+make, and I'd have no way to tell whether the metric or the router was wrong.
+Item 15 measures the proxy I can defend (does the tier choice match a human
+judgement) and stops there. The honest headline is still "2% cheaper, quality
+delta unmeasured."
+
+**Questions resolved:** 1-2026-08-03, 2-2026-08-03, 3-2026-08-03, 4-2026-08-03,
+1-2026-08-19, 2-2026-08-19, 3-2026-08-19, 4-2026-08-19, 5-2026-08-19,
+6-2026-08-19, 7-2026-08-19, 8-2026-08-19, 9-2026-08-19, 10-2026-08-19
+
+**What I'd tell a freshman about this:**
+Write the test that asserts what you think you just built (This part is fine to automate with some review). 
+I added a capacity check and wrote a test saying it would skip the cheap tier on an oversized
+prompt. It failed because anything big enough to overflow an 8192-token window
+is 70x past the 400-character complexity threshold, so those prompts were
+already being routed expensive and the cheap tier was never in the running.
+
+Same thing again an hour later: three prompts in my "long but simple" test
+category were 322-396 characters against a 400-character threshold. One missed
+by four characters. That whole category was scoring 100% while testing nothing,
+and it made the router look 60% accurate instead of 50%.
+
+The code was fine and my belief about the code was wrong. That's the
+same lesson as the 08-03 socratic audit (3-2026-08-03) from the other direction,
+there I found out what I didn't understand by being asked.

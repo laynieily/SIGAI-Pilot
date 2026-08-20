@@ -12,7 +12,7 @@ members:
   - name: Luis Chavez
     github: LuisJC-creator
     project_repo: LuisJC-creator/LLMCostOptimizer
-    docs_path: ""
+    docs_path: LLM-COST-Autopilot/Luis-Chavez
 
   - name: Sasank Panchumarthi
     github: sasankpanch
