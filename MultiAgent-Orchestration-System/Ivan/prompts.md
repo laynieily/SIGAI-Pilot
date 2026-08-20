@@ -312,3 +312,26 @@ This pushback showed up several times over the session:
 ### Outcome
 
 Every one of these pushes changed what actually got built compared to the first version proposed: an isolated experiment to separate a data problem from an instruction problem, a smarter content filter instead of a bigger one, and a verification step in the reviewer that didn't exist in the first draft. Requiring evidence before implementing slowed the session down, but caught at least two fixes that would not have actually worked.
+
+---
+
+# Prompt Engineering Experiment (Week 5)
+
+## Experiment
+
+Refused to accept isolated logic tests as proof that the pause/resume/approval-level mechanism actually worked, and insisted on running it live against the real system before trusting it — even after being told all cases passed.
+
+### Goal
+
+Extend the same "require evidence, not a plausible-sounding explanation" discipline from earlier weeks to Claude's own verification, not just its proposed fixes.
+
+### Pattern
+
+After the escalation triggers were reported as verified via isolated logic tests, asked to run the mechanism live with a real LLM instead of accepting that as sufficient.
+Personally executed every live test across two terminals, including forcing specific scenarios (a "send an email" prompt to trigger a sensitive-operation escalation, a deliberate temporary failure injected into one specialist to trigger the last untested approval path).
+Noticed, from reading terminal output carefully, that a single-subtask plan needed three approvals instead of one — a symptom the isolated tests had no way to catch, since they never simulated a full multi-step run.
+Requested that approve/reject actually change what happens next, instead of accepting that both did the same thing.
+
+### Outcome
+
+The insistence on live testing over isolated verification directly caught a real, reproducible bug (a resolved escalation being mistaken for a new one on every subsequent node) that would have shipped otherwise — the isolated tests were confident and wrong. Also surfaced a design gap (approve/reject being functionally identical) that got closed the same session.

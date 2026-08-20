@@ -207,3 +207,20 @@ This isn't solved yet. A proper fix would need a dedicated content-extraction ap
 
 ---
 
+## Issue: Escalation State Wasn't Cleared After a Resume (Week 5)
+
+### Problem
+
+After a paused run got approved and continued, it immediately paused again with the exact same reason — a one-subtask plan needed three approvals in a row to finish what should've taken one.
+
+### Investigation
+
+Traced it to the escalation node never resetting its own trigger reason once a run continued past it, so the very next step saw the old value and mistook it for a brand new escalation.
+
+### Resolution
+
+Clear the reason whenever the run is actually continuing, and keep a separate, never-cleared list just for the final summary — so clearing it for routing doesn't also erase it from the report.
+
+### Lessons Learned
+
+Isolated tests checked the right decision in isolation but never simulated a full multi-step run, so they couldn't have caught this — only running it live did.

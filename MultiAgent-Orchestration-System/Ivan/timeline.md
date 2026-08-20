@@ -147,3 +147,37 @@
 - Pushed back on proposed solutions and demanded root-cause analysis before allowing any implementation, which changed the fix that was eventually built.
 - Verified a technical claim by opening the real source page myself, catching a case where an explanation didn't fully match reality.
 - Kept the same discipline from previous weeks: trace problems to their root cause instead of guessing at fixes.
+
+## Week 5 - August 20, 2026
+
+### Architecture Analysis
+
+- Reviewed how LangGraph's pause-and-resume mechanism actually works under the hood, and what a checkpointer is for.
+- Mapped the four approval levels from the guideline onto the five escalation triggers already built, deciding which level fits which kind of interruption.
+- Confirmed that none of the agents carry any persistent awareness of the system's own mechanisms — each one only sees whatever gets built into its own prompt, call by call.
+
+### Implementation
+
+- Wired all five escalation triggers so each one genuinely pauses the run instead of just ending it.
+- Added a persistent, cross-process checkpoint store so a paused run can be picked up later from a completely separate script.
+- Built a second command-line tool, separate from the main demo script, that lists and resumes paused runs from any terminal.
+- Made approve and reject genuinely change what happens next, instead of being recorded and then ignored.
+- Unified two scoring fields that had drifted onto different scales, and moved that guidance into the schema itself instead of leaving it in prompt text alone.
+
+### Debugging & Fixes
+
+- Found, only by testing against the real system instead of trusting isolated logic tests, that a resolved escalation kept getting mistaken for a new one — a plan needing one approval was asking for three.
+- Fixed that same fix from quietly breaking the final summary, since clearing the stale value also erased the one reason worth reporting once the run finished.
+- Reverted a deliberate, temporary failure injected into one specialist, once it had done its job of proving the last untested approval path actually works.
+
+### Design Decisions
+
+- Insisted both scoring fields share one scale[0 - 1] instead of leaving the inconsistency for later.
+- Required a rejection to actually route back for a redo, closing a gap where approving and rejecting did the exact same thing.
+- Chose to test every approval path against the real system instead of accepting the isolated tests as proof enough.
+
+### AI Workflow Improvement
+
+- Ran every live test personally rather than relying on Claude's own isolated verification, which is what actually surfaced the stale-escalation bug.
+- Made explicit calls on scope and design mid-session — the scale unification, closing the approve/reject gap — instead of accepting whatever was proposed by default.
+- Kept pushing to validate claims live even after Claude had already reported something as "confirmed working."
