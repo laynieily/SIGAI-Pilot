@@ -262,3 +262,76 @@ Claude implemented a centralized Tool Registry that manages tool registration, p
 ### Reflection
 
 This session emphasized building infrastructure before enabling complex behaviors. Even though the conditional branches are currently inactive, implementing them early establishes a scalable architecture for future development.
+
+---
+
+> **Note:** From this point on, only prompts that represent a meaningful shift in development strategy are included here. So far, most of the work has followed the same loop: investigate the code, analyze it, fix errors, research implementation details, and trace execution step by step.
+
+## Prompt 9 (Week 3)
+
+### Prompt
+
+Asked what would actually happen if MockLLM were disabled in favor of a real OpenAI key, then proceeded to add real API keys and run the full pipeline end to end.
+
+### Purpose
+
+Validate an architecture that had been built and tested entirely against a deterministic mock, by finally running it against a real, non-deterministic LLM.
+
+### Outcome
+
+The switch immediately surfaced two bugs the mock had been silently hiding: a real chat model returns a structured message object instead of a plain string, and a real LLM's generated plan can legitimately skip a specialist altogether -- which crashed the graph the first time it happened. Both were fixed (a shared text-extraction helper, and making the graph skip missing specialists instead of assuming all four always exist). After the fixes, the pipeline completed a full run against a real model, including a real tool call.
+
+### Reflection
+
+This was the first moment the project's actual behavior diverged from what the mock had predicted. It confirmed that a deterministic mock is great for building structure quickly, but can't substitute for testing against the real variability the system will eventually face -- several "revisit once plans stop being mocked" comments written weeks earlier turned into real, reproducible bugs exactly as anticipated, which validated the habit of flagging assumptions the moment they're made rather than after the fact.
+
+---
+
+---
+
+# Prompt Engineering Experiment (Week 4)
+
+## Experiment
+
+Instead of accepting the first proposed fix whenever something went wrong, I pushed back and asked for a deeper root-cause analysis before letting any change touch the code. The goal was to see whether requiring evidence up front, instead of trusting the first plausible-sounding explanation, would lead to better decisions and catch weak fixes before they got built.
+
+### Goal
+
+Slow down before implementing. Require proof that a proposed fix addresses the actual cause, not just a symptom.
+
+### Pattern
+
+This pushback showed up several times over the session:
+
+- When the LLM kept inventing GPU specs (when using test prompt), the first proposed fix was to make it say "I'm not sure, so this is only an approximation" instead of stating facts confidently. I pushed back that this only softened the problem instead of solving it, and asked to first determine whether the cause was missing data or missing instructions before deciding what to build.
+- When search results weren't giving the model enough real content, the proposed fix was to just read more characters from each page. I refused to implement that, questioning whether reading more raw text was actually efficient, since most of a heavy website is navigation menu, not real content — that refusal led to a proper filter instead of a blind size increase.
+- Once real page content was being fetched, I manually opened the same web pages myself to confirm whether the information the task needed was actually present, instead of trusting an explanation of why the model might be failing.
+- Raised the question of whether records saved to long-term memory during active development and testing should be purged, since early test runs had stored answers that were later proven wrong.
+- Asked directly whether a plan's declared task dependencies were actually driving execution order or just decorative — which led to that being properly wired in, though I'm still not fully sure yet how much it changes in practice.
+
+### Outcome
+
+Every one of these pushes changed what actually got built compared to the first version proposed: an isolated experiment to separate a data problem from an instruction problem, a smarter content filter instead of a bigger one, and a verification step in the reviewer that didn't exist in the first draft. Requiring evidence before implementing slowed the session down, but caught at least two fixes that would not have actually worked.
+
+---
+
+# Prompt Engineering Experiment (Week 5)
+
+## Experiment
+
+Refused to accept isolated logic tests as proof that the pause/resume/approval-level mechanism actually worked, and insisted on running it live against the real system before trusting it — even after being told all cases passed.
+
+### Goal
+
+Extend the same "require evidence, not a plausible-sounding explanation" discipline from earlier weeks to Claude's own verification, not just its proposed fixes.
+
+### Pattern
+
+After the escalation triggers were reported as verified via isolated logic tests, asked to run the mechanism live with a real LLM instead of accepting that as sufficient.
+Personally executed every live test across two terminals, including forcing specific scenarios (a "send an email" prompt to trigger a sensitive-operation escalation, a deliberate temporary failure injected into one specialist to trigger the last untested approval path).
+Noticed, from reading terminal output carefully, that a single-subtask plan needed three approvals instead of one — a symptom the isolated tests had no way to catch, since they never simulated a full multi-step run.
+Requested that approve/reject actually change what happens next, instead of accepting that both did the same thing.
+
+### Outcome
+
+The insistence on live testing over isolated verification directly caught a real, reproducible bug (a resolved escalation being mistaken for a new one on every subsequent node) that would have shipped otherwise — the isolated tests were confident and wrong. Also surfaced a design gap (approve/reject being functionally identical) that got closed the same session.

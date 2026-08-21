@@ -4,7 +4,9 @@ A transparency record of what I asked AI while building this project. Paste each
 prompt here, roughly in order. Keep it honest — including the throwaway questions.
 
 Marking convention (matches `Documentation.md`): `[LC]` = me (Luis Chavez),
-`[AI]` = assistant. Unmarked lines are mine by default.
+`[AI]` = assistant. Unmarked lines are mine by default. `[AI & LC]` marks
+collaborative content — the 2026-08-19 audit findings, where I asked the
+questions and the assistant answered them against the codebase.
 
 ## Split with `Documentation.md`
 
@@ -70,7 +72,7 @@ I got a brief explanation of venv, got the pip installs, .gitignore, and directo
 How should I structure this documentation file to live in the middleground we discussed in the meeting?
 
 **What I did with the answer (used / adapted / rejected):**
-Suggested [AI] vs [LC] tags for clarity. A repeating entry template. I rejected automating the actual entries whatsoever since the goal is to document my experiences not AI-inveted ones.
+Suggested [AI] vs [LC] tags for clarity. A repeating entry template. I rejected automating the actual entries whatsoever since the goal is to document my experiences not AI-invented ones.
 
 **What I asked:**
 I need help understanding json=params, what is it actually doing?
@@ -111,6 +113,7 @@ If Response is supposed to be a dumb data record, shouldn't cost be calculated i
 Anthropic's newest model Opus 5 agreed and offered me some suggestions on how to change the dataclasses to reflect this.
 I accepted it's suggestion of a new function in the model config dataclass that passes in prompt and completion tokens as function arguments and uses self to calculate the price. (Similar to previous cost function in Response, just moved to model config).
 Doing it this way meant that Response could calculate a price without relying on another object as it was doing before by passing in a model config.
+
 ---
 
 ### 1-2026-07-29 — Planning ahead on adapter structure and latency concerns.
@@ -118,8 +121,8 @@ Doing it this way meant that Response could calculate a price without relying on
 **Asked:**
 Given my background in Rust I was wondering if we could gain any efficiency by implementing components in the language.
 
-**Verdict:** used | adapted | rejected | deferred
-Deferred, Rust gains are not significant and Python handles data science better. Revisiting later.
+**Verdict:** deferred
+Rust gains are not significant and Python handles data science better. Revisiting later.
 
 **Note:** None
 
@@ -128,9 +131,10 @@ Deferred, Rust gains are not significant and Python handles data science better.
 ### 2-2026-07-29 — Config.py, base-urls, and Missing API key
 
 **Asked:**
-Implement the basic CHEAP_LOCAL (Ollama) and SMART_CLOUD (Anthropic). Pending anthropic API key, 
-**Verdict:** used | adapted | rejected | deferred
-Adapted, fixed base-urls to host roots instead of previous *entire* urls.
+Implement the basic CHEAP_LOCAL (Ollama) and SMART_CLOUD (Anthropic). Pending anthropic API key,
+
+**Verdict:** adapted
+Fixed base-urls to host roots instead of previous *entire* urls.
 
 **Note:** None
 
@@ -139,8 +143,292 @@ Adapted, fixed base-urls to host roots instead of previous *entire* urls.
 ### 3-2026-07-29 — Adapter Question
 
 **Asked:**
-Why do we use many different similar looking adapaters, even though they have similar fields? I'm aware of the provider specifics, but won't this lead to tons of adapters?
+Why do we use many different similar looking adapters, even though they have similar fields? I'm aware of the provider specifics, but won't this lead to tons of adapters?
+
 **Verdict:** used | adapted | rejected | deferred
-I now understand that there are API dialetcs that the adapters are using, and many models fit into the main 4. Anthropic being the most unique as it has its own dialect, but many models like Minstral / Grok / DeepSeek use the openai dialect so they can all go through one adapter.
+I now understand that there are API dialects that the adapters are using, and many models fit into the main 4. Anthropic being the most unique as it has its own dialect, but many models like Mistral / Grok / DeepSeek use the openai dialect so they can all go through one adapter.
 
 **Note:** None
+
+---
+
+## 2026-07-30 ~ 2026-08-03 BLOCK
+
+**Note:** I got backed up on documenting experimenting with pacing. Today I'm making an effort to update with some questions I asked the models. Not every question will be included since there are multiple repeats and some redundant information. I feel that what I'm including is relevant, but I have access to all questions in my history log so I can update to include if I feel it is necessary. Most of the bulk work was done on my linux machine which I will have to return home to access, but that will be the bulk of the work today along with some testing.
+
+---
+
+### 1-2026-08-03 — Project status audit + architecture diagram
+
+**Asked:**
+Project status audit + completion % + architecture diagram
+
+**Verdict:** used
+Became docs/architecture.md
+
+**Note:** None
+
+---
+
+### 2-2026-08-03 — Assessing a colleague's stack
+
+**Asked:**
+Assess a colleague's stack (Anthropic + Gemini free tier + Ollama + dead OpenAI price ref)
+
+**Verdict:** deferred
+Full stack would reopen phase 2. A dead-config pricing is worth taking if kept unroutable
+
+**Note:** None
+
+---
+
+### 3-2026-08-03 — Router understanding audit
+
+**Asked:**
+Audit my understanding of the router architecture
+
+**Verdict:** used
+I had Claude ask me questions about why decisions were made and how the functions worked. I also asked it clarifying questions along which lead to bug discoveries that will be documented in Documentation.md
+
+**Note:** This was one of the most important steps I feel. It's the same feeling as when you read through a math problem with the answers filled out and think "I understand." But put the same problem in front of you blank, and whether or not you can complete it tells you everything you need to know about if you understand. It's a simple, although time consuming method I use to make sure I understand what's written when leveraging AI coding.
+
+---
+
+### 4-2026-08-03 — Router understanding audit
+
+<!-- [AI] DUPLICATE OF 3-2026-08-03 — identical Asked/Verdict/Note. Left in place
+     rather than deleted, since deleting is not a formatting change. Delete one,
+     or repurpose this as the second (2026-08-03 afternoon) audit session. -->
+
+**Asked:**
+Audit my understanding of the router architecture
+
+**Verdict:** used
+I had Claude ask me questions about why decisions were made and how the functions worked. I also asked it clarifying questions along which lead to bug discoveries that will be documented in Documentation.md
+
+**Note:** This was one of the most important steps I feel. It's the same feeling as when you read through a math problem with the answers filled out and think "I understand." But put the same problem in front of you blank, and whether or not you can complete it tells you everything you need to know about if you understand. It's a simple, although time consuming method I use to make sure I understand what's written when leveraging AI coding.
+
+---
+
+## [AI] 2026-08-19 — 2-week gap catch-up
+
+<!-- [AI] Ten audit questions asked by LC throughout the two week gap, answered by the
+     assistant against the codebase rather than from memory. Every claim below
+     was checked by reading the source or by running it; the measured numbers in
+     Q3 come from timeit, and the block-handling claim in Q10 cites a line.
+
+     CONVENTION NOTE: these entries add a **Finding:** field that the template
+     does not have. The template assumes "I asked how to do X, here is what I
+     did with the answer" — but these are audit questions, where the answer is
+     itself the deliverable and there is no code change to verdict. The finding
+     is marked [AI & LC]: LC set the questions, the assistant wrote the
+     answers. The **Verdict:** and **Note:** fields are left blank — this was a
+     catch-up pass, and assigning verdicts to audit findings is a different
+     exercise from verdicting a suggestion that produced code. Drop the field or
+     fold it into the verdict line if the extra field is not wanted. -->
+
+### 1-2026-08-19 — How complexity is actually measured
+
+**Asked:**
+How does the system measure text complexity (e.g., readability scores, embedding
+classifiers, or a lightweight LLM)?
+
+**Finding:** [AI & LC] None of the three. It is a 17-word hand-written `frozenset`
+intersected against the tokenized prompt, OR `len(prompt) >= 400`. No readability
+score, no embeddings, no classifier model. Whole-word matching only, so "improve"
+does not trip "prove". `router.py` already labels this "deliberately crude... not
+a claim about what actually predicts model adequacy."
+
+**Verdict:**
+
+**Note:**
+
+---
+
+### 2-2026-08-19 — Routing accuracy metrics and false positives
+
+**Asked:**
+What metrics define routing accuracy, and how do you prevent false positives that
+send complex prompts to cheap models?
+
+**Finding:** [AI & LC] There are no metrics — no labeled set, no ground truth, no
+precision/recall. Routing accuracy has never been measured in any form.
+
+False positives are not merely unprevented, they are **structurally
+undetectable**: the tier is chosen before the call and the answer is never
+evaluated, so a complex prompt sent cheap returns a confident wrong answer and
+the run reports it as a success with 100% savings. The single datapoint is the
+2026-07-31 observation, found by accident. See work-queue items 12 and 15 -- 15 measured this: 0/6 on the short-but-hard cases.
+
+**Verdict:**
+
+**Note:**
+
+---
+
+### 3-2026-08-19 — Overhead of the classification step
+
+**Asked:**
+How much latency does the complexity analysis step add to the overall request
+overhead?
+
+**Finding:** [AI & LC] Measured 2026-08-19 with `timeit`: **1.6 microseconds** for a
+30-char prompt, **19 microseconds** at 1112 chars. Against measured call latency
+of ~2.6 s (local) and 5.6-7.9 s (hosted), classification is ~0.0006% of the
+cheapest possible call — free in practice.
+
+Worth stating the trade this represents: it is fast *because* it is crude. Both
+alternatives in Q1 give this up, and an embedding call would likely add more
+latency than the routing decision saves.
+
+**Verdict:**
+
+**Note:**
+
+---
+
+### 4-2026-08-19 — Fallback on failure vs. on low confidence
+
+**Asked:**
+What fallback mechanisms exist if a low-cost model fails or returns a
+low-confidence response?
+
+**Finding:** [AI & LC] Two questions, two different answers.
+
+*Fails* — handled. `route()` climbs the tier ladder; `ConnectError`, timeout,
+HTTP error, and a missing API key all produce a failed `Response` that triggers
+the next rung. Covered by tests as of item 11.
+
+*Low confidence* — **does not exist.** No confidence signal is produced, stored,
+or read anywhere; `grep` returns nothing. The trigger is `if not response.ok`,
+which is transport success, not answer quality. Item 16 narrowed this: an empty reply now escalates. Judging a non-empty answer remains item 12.
+
+**Verdict:**
+
+**Note:**
+
+---
+
+### 5-2026-08-19 — Context windows vs. the length threshold
+
+**Asked:**
+How does the router handle dynamic context window limits when assessing text
+length alongside complexity?
+
+**Finding:** [AI & LC] It did not, and the question exposed a category error worth
+recording. `LONG_PROMPT_CHARS = 400` is a *complexity* proxy; a context window is
+a *capacity* limit. They are unrelated quantities, and the code conflated them by
+having only one length number.
+
+For scale: 400 chars is ~100 tokens. `llama3.2` has a 131k-token window, Haiku
+200k. The threshold sits three orders of magnitude below either, so it could
+never function as an overflow guard. No model's window was recorded in
+`ModelConfig` at all. Addressed by work-queue item 13.
+
+**Verdict:**
+
+**Note:**
+
+---
+
+### 6-2026-08-19 — Keeping pricing and capability specs current
+
+**Asked:**
+What is the threshold or workflow for updating model tiers when pricing or
+capability specs change?
+
+**Finding:** [AI & LC] Hand-editing two float literals in `config.py`, with a
+hand-written comment as the only provenance. No source of truth, no fetch, no
+staleness date, no test asserting the rates are current. If a provider changes
+pricing, every cost figure in the repo silently becomes wrong and nothing
+detects it.
+
+The 2026-08-19 alias finding sharpens this: `claude-haiku-4-5` resolved to
+`claude-haiku-4-5-20251001`, so the capability behind a fixed config string can
+also move underneath you. Addressed by work-queue item 17.
+
+**Verdict:**
+
+**Note:**
+
+---
+
+### 7-2026-08-19 — Per-request options, preferences, SLAs
+
+**Asked:**
+How are custom token limits, user preferences, or SLA guarantees factored into
+routing decisions?
+
+**Finding:** [AI & LC] They are not. `route(prompt)` takes exactly one argument, a
+string. There is no per-request options object, no user, no preference, and no
+SLA concept anywhere in the codebase. `max_tokens` and `timeout` are
+per-*config*, fixed at import time.
+
+Related: the 2026-08-19 run showed `max_tokens=1000` truncating both hosted
+answers mid-sentence, billed at the full cap either way.
+
+**Verdict:**
+
+**Note:**
+
+---
+
+### 8-2026-08-19 — Cost savings vs. quality degradation
+
+**Asked:**
+How do you evaluate cost savings against potential degradation in response
+quality or user satisfaction?
+
+**Finding:** [AI & LC] Cost is measured precisely; quality is not measured at all.
+That asymmetry biases in one direction — the demo reports savings to six decimals
+and has no number for what those savings cost, so cheap routes look free because
+the failure mode is invisible.
+
+The honest headline for the 2026-08-19 run is "2% cheaper, quality delta
+unmeasured," which is both weaker and more accurate than what the demo prints.
+This is the same gap as Q2 seen from the cost side. Item 15 built the measurement half; item 12 (was the answer good?) is still open.
+
+**Verdict:**
+
+**Note:**
+
+---
+
+### 9-2026-08-19 — Statelessness and chat context
+
+**Asked:**
+Is prompt history or chat context considered, or is each request routed
+independently?
+
+**Finding:** [AI & LC] Each request is routed independently and statelessly. The
+Anthropic payload is always one user turn — no session, no history, no
+conversation id.
+
+Consequence worth recording: in a real chat application, per-turn routing means a
+conversation can silently switch models mid-thread, with the new model holding no
+memory of what the previous one said.
+
+**Verdict:**
+
+**Note:**
+
+---
+
+### 10-2026-08-19 — Structured output and tool calls
+
+**Asked:**
+How does the system handle structured output constraints or specific tool-calling
+requirements that smaller models might miss?
+
+**Finding:** [AI & LC] Not supported, with a concrete consequence in `adapters.py`:
+the reply parser took the **first** `{"type": "text"}` block and silently
+discarded everything else. A reply carrying `tool_use` blocks would yield empty
+or partial `text` with no error raised and no flag set. The raw JSON survived in
+`Response.raw`, so nothing was irrecoverably lost, but nothing downstream reads
+`raw`. Addressed by work-queue item 14.
+
+**Verdict:**
+
+**Note:**
+
+---

@@ -59,59 +59,168 @@ The provider should likely act as a factory instead of duplicating the mock impl
 
 ### Problem
 
-`provider.py` referenced `settings.USE_MOCK` and `MockLLM()` without importing either — `settings` didn't exist anywhere in the project, and `MockLLM` was never imported.
+`provider.py` referenced a configuration object and a class that were never defined or imported anywhere in the project.
 
 ### Investigation
 
-Read the file directly; confirmed it was an incomplete stub, not a working implementation. Checked the rest of the repo for a `settings`/config module — none existed.
+Reviewed the file directly and confirmed it was an incomplete stub, not a working implementation.
 
 ### Resolution
 
-Implemented `LLMProvider.get_llm()` as a real factory: returns `MockLLM` if `USE_MOCK` is set or no API key is found, otherwise `ChatAnthropic`/`ChatOpenAI` depending on which key is present in `.env`.
+Implemented a real factory that returns the mock or a real model depending on which API key is available.
 
 ### Lessons Learned
 
-Confirms the hypothesis from Week 1's "Duplicate Mock Implementation" issue — `provider.py`'s actual job is to be a factory that *chooses* an implementation, not to contain any LLM logic itself.
+The provider's job is to choose an implementation, not to contain any logic of its own.
 
 ---
 
-## Issue: `git merge` Left the Environment Half-Installed
+## Issue: Incomplete Dependency Install After Merging
 
 ### Problem
 
-After merging with a separate GitHub remote, running the demo failed with `ModuleNotFoundError: No module named 'dotenv'`, even though `langgraph` and `pydantic` clearly worked (later imports in the same chain succeeded).
+Running the project failed with a missing-module error after merging with a separate GitHub repository, even though other dependencies clearly worked.
 
 ### Investigation
 
-The traceback showed `dotenv` failing specifically — and `python-dotenv` is the *last* line in `requirements.txt`. That pointed to `pip install -r requirements.txt` aborting partway through on some earlier package, rather than nothing being installed at all.
+Traced the error to a package listed near the end of the requirements file, suggesting the install had stopped partway through.
 
 ### Resolution
 
-Installed `python-dotenv` directly to unblock, and flagged the likely root cause (a package earlier in the file failing to build) for a full reinstall later.
+Installed the missing package directly and flagged the likely cause for a full reinstall later.
 
 ### Lessons Learned
 
-A partial `pip install` failure can look exactly like "forgot to install dependencies" from the error message alone — the *position* of the missing package in the requirements file was the actual clue.
+A partial install can look identical to a forgotten one — where the missing package sits in the list can be the real clue.
 
 ---
 
-## Issue: Merge Diff Looked Like Everything Changed
+## Issue: Merge Made It Look Like Files Had Changed
 
 ### Problem
 
-After the same `git merge`, `git status`/`git diff` showed several core files (`models.py`, `mock.py`, tool files) as modified, which looked like the merge might have silently altered working code.
+After the same merge, several core files appeared modified, suggesting the merge may have altered working code.
 
 ### Investigation
 
-Ran `git diff` on each flagged file and compared line by line — every "changed" line was identical content, differing only in CRLF vs. LF line endings. Checked `requirements.txt` and `.gitignore` at the byte level for BOM/encoding corruption as well.
+Compared the changes line by line and found they were only differences in line endings, not actual content.
 
 ### Resolution
 
-Confirmed no functional changes; the diffs were pure line-ending noise from the merge. No code changes needed.
+Confirmed no real changes had occurred; nothing needed fixing.
 
 ### Lessons Learned
 
-A large `git diff` after a merge isn't proof of a real change — checking for line-ending-only diffs first avoids chasing a bug that doesn't exist.
+A large diff after a merge isn't proof that something broke — check for formatting-only changes first.
+
+
+
 
 ---
 
+## Issue: Real LLM Responses Didn't Match the Expected Format (Week 3)
+
+### Problem
+
+Switching from the mock to a real model broke the pipeline, since a real model returns a structured message object instead of plain text.
+
+### Investigation
+
+Compared how the mock and the real model each responded to the same call and found the mismatch.
+
+### Resolution
+
+Added a small helper that extracts plain text regardless of which type of response comes back.
+
+### Lessons Learned
+
+Code written against a mock needs to be checked against the real thing before assuming it behaves the same way.
+
+---
+
+## Issue: Real Plan Skipped a Specialist and Crashed the Graph
+
+### Problem
+
+The first real end-to-end run failed because the generated plan didn't include every specialist, which the graph assumed would always be present.
+
+### Investigation
+
+Traced the crash back to a lookup that expected to always find a match.
+
+### Resolution
+
+Updated the lookup to skip gracefully when a specialist isn't needed, instead of failing.
+
+### Lessons Learned
+
+A real model won't always follow the same fixed pattern a hardcoded mock does — the system needs to tolerate that variation.
+
+---
+
+
+
+
+
+
+
+
+---
+
+## Issue: Proposed Fixes for Hallucinated Answers Didn't Hold Up to Scrutiny (Week 4)
+
+### Problem
+
+The first suggested fixes for the LLM inventing technical specs — having it hedge with "this is only an approximation," and reading more raw text from search results — both sounded reasonable but didn't actually solve the problem.
+
+### Investigation
+
+Questioned each proposal before implementing it. Ran a controlled test with only the hedging instruction changed, and manually opened the pages driving the raw-text idea, to see what each fix would realistically accomplish.
+
+### Resolution
+
+The hedging instruction alone was too easy to satisfy without really fixing anything, and reading more text mostly just meant reading more navigation menu. Replaced both with something backed by evidence: a stricter no-loophole instruction, and a filter built after testing showed what was actually eating the character budget.
+
+### Lessons Learned
+
+A fix that sounds reasonable isn't the same as a fix that's been tested against the actual failure.
+
+---
+
+## Issue: Web Search Still Doesn't Reliably Get the System Real Information
+
+### Problem
+
+Even after adding a way to read full page content instead of just search snippets, the system still regularly answers with either invented specifics or an honest "I don't know" — both cases where the real answer was sitting on the page it fetched.
+
+### Investigation
+
+Opened the same source pages by hand and confirmed the requested information was present in plain text, not hidden behind anything unusual. The real problem is how much of the fetched page is navigation clutter versus actual content, which varies a lot page to page.
+
+### Resolution
+
+Improved the filtering enough to cut a meaningful amount of that clutter, but it's a heuristic, not a guarantee — it still fails on some pages.
+
+### Lessons Learned
+
+This isn't solved yet. A proper fix would need a dedicated content-extraction approach, not more tuning of a quick filter.
+
+---
+
+## Issue: Escalation State Wasn't Cleared After a Resume (Week 5)
+
+### Problem
+
+After a paused run got approved and continued, it immediately paused again with the exact same reason — a one-subtask plan needed three approvals in a row to finish what should've taken one.
+
+### Investigation
+
+Traced it to the escalation node never resetting its own trigger reason once a run continued past it, so the very next step saw the old value and mistook it for a brand new escalation.
+
+### Resolution
+
+Clear the reason whenever the run is actually continuing, and keep a separate, never-cleared list just for the final summary — so clearing it for routing doesn't also erase it from the report.
+
+### Lessons Learned
+
+Isolated tests checked the right decision in isolation but never simulated a full multi-step run, so they couldn't have caught this — only running it live did.

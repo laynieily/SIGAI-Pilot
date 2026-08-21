@@ -1,0 +1,46 @@
+# SIGAI-Pilot team hub registry.
+# Used to build an activity *snapshot* (sorted by latest update), not a
+# static directory. Hub rebuilds on merge to main and daily via cron.
+# Optional fields: project_url (override project link), docs_path (SIGAI notes).
+
+members:
+  - name: Laynie Avila
+    github: laynieily
+    project_repo: laynieily/agent-orchestration-system
+    docs_path: MultiAgent-Orchestration-System/Laynie
+
+  - name: Luis Chavez
+    github: LuisJC-creator
+    project_repo: LuisJC-creator/LLMCostOptimizer
+    docs_path: LLM-COST-Autopilot/Luis-Chavez
+
+  - name: Sasank Panchumarthi
+    github: sasankpanch
+    project_repo: ""
+    docs_path: ""
+
+  - name: Claudia Cassandra
+    github: cloudia-cassandra
+    project_repo: cloudia-cassandra/Orchestra
+    docs_path: MultiAgent-Orchestration-System/Cassie
+
+  - name: Jesus Ivan Ibarra
+    github: IvanIbarra18
+    project_repo: IvanIbarra18/Project-15
+    docs_path: MultiAgent-Orchestration-System/Ivan
+
+  - name: Bethany Tijerina
+    github: BethanyTijerina
+    project_repo: BethanyTijerina/LLM-Cost-Autopilot
+    docs_path: LLM-COST-Autopilot/Bethany-Tijerina
+
+  - name: Francisco Izaguirre
+    github: fizagui2
+    project_repo: ""
+    project_url: https://github.com/laynieily/SIGAI-Pilot/tree/main/Project6/Francisco
+    docs_path: Project6/Francisco
+
+  - name: Viviana Ayala
+    github: Vayala13
+    project_repo: Vayala13/LLM-COST-Autopilot
+    docs_path: LLM-COST-Autopilot/Viviana-Ayala
