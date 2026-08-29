@@ -36,8 +36,8 @@ members:
 
   - name: Francisco Izaguirre
     github: fizagui2
-    project_repo: ""
-    project_url: https://github.com/laynieily/SIGAI-Pilot/tree/main/Project6/Francisco
+    project_repo: "https://github.com/fizagui2/hybrid-rag-document-assistant"
+    project_url: https://github.com/fizagui2/hybrid-rag-document-assistant
     docs_path: Project6/Francisco
 
   - name: Viviana Ayala
