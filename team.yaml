@@ -16,8 +16,8 @@ members:
 
   - name: Sasank Panchumarthi
     github: sasankpanch
-    project_repo: ""
-    docs_path: ""
+    project_repo: sasankpanch/Agent-Orchestration-System
+    docs_path: MultiAgent-Orchestration-System/Sasank
 
   - name: Claudia Cassandra
     github: cloudia-cassandra
